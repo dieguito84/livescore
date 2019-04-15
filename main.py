@@ -2,6 +2,8 @@ from requests_html import HTMLSession
 
 #url = "https://www.livescore.com/soccer/live/"
 url = "https://www.livescore.com/"
+#url = "https://www.livescore.com/soccer/champions-league/"
+#url = "https://www.livescore.com/soccer/europa-league/"
 
 user_agent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:63.0) Gecko/20100101 Firefox/63.0"
 
@@ -16,7 +18,9 @@ all_leagues = (page.html.find("div[class='row row-tall'][data-type='stg']")) + (
 
 for l in all_leagues:
     league = l.text.split("\n")
-    if league[0] in top5_national_leagues:
+    #if league[0] in top5_national_leagues:
+    #if league[0] in top5_national_leagues or uefa_club_leagues[0] in league[0] or uefa_club_leagues[1] in league[0]:
+    if league[0] in top5_national_leagues or any(x in league[0] for x in uefa_club_leagues):
         print("\n- " + league[0] + "\n------------------------------")
         all_matches = page.html.find("a[data-stg-id='{}']".format(l.attrs["data-stg-id"]))
         for m in all_matches:
