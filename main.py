@@ -26,4 +26,12 @@ for l in all_leagues:
         for m in all_matches:
             match = m.text.split("\n")
             print("{} {} {}".format(match[2], match[3], match[4]))
+            url2 = "https://www.livescore.com" + m.attrs["href"]
+            session2 = HTMLSession()
+            page2 = session2.get(url2, headers={"User-Agent": user_agent})
+            page2.html.render()
+            #match_details = (page2.html.find("div[data-type='content']"))
+            match_details = (page2.html.find("div[data-type='incident']"))
+            for md in match_details:
+                print(md)
         print("------------------------------")
