@@ -29,7 +29,9 @@ for l in all_leagues:
             page2 = session2.get(url2, headers={"User-Agent": user_agent})
             page2.html.render()
             match_details = (page2.html.find("[data-type=incident]"))    # CSS selector
+            #match_details = (page2.html.find("[data-type=incident] > div.min"))    # CSS selector
             for md in match_details:
+                print(md.html)
                 print(md.text.split("\n"))
                 #if md.attrs["data-type"] == 'incident':
                     #print(md.attrs)
