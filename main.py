@@ -18,8 +18,6 @@ all_leagues = (page.html.find("div[class='row row-tall'][data-type='stg']")) + (
 
 for l in all_leagues:
     league = l.text.split("\n")
-    #if league[0] in top5_national_leagues:
-    #if league[0] in top5_national_leagues or uefa_club_leagues[0] in league[0] or uefa_club_leagues[1] in league[0]:
     if league[0] in top5_national_leagues or any(x in league[0] for x in uefa_club_leagues):
         print("\n- " + league[0] + "\n------------------------------")
         all_matches = page.html.find("a[data-stg-id='{}']".format(l.attrs["data-stg-id"]))
@@ -30,8 +28,9 @@ for l in all_leagues:
             session2 = HTMLSession()
             page2 = session2.get(url2, headers={"User-Agent": user_agent})
             page2.html.render()
-            #match_details = (page2.html.find("div[data-type='content']"))
-            match_details = (page2.html.find("div[data-type='incident']"))
+            match_details = (page2.html.find("[data-type=incident]"))    # CSS selector
             for md in match_details:
-                print(md)
+                print(md.text.split("\n"))
+                #if md.attrs["data-type"] == 'incident':
+                    #print(md.attrs)
         print("------------------------------")
