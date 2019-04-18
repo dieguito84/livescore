@@ -31,8 +31,15 @@ for l in all_leagues:
             match_details = (page2.html.find("[data-type=incident]"))    # CSS selector
             #match_details = (page2.html.find("[data-type=incident] > div.min"))    # CSS selector
             for md in match_details:
-                print(md.html)
+                #print(md.html)
                 print(md.text.split("\n"))
-                #if md.attrs["data-type"] == 'incident':
-                    #print(md.attrs)
+                #print(md.find("svg[class='inc goal']"))
+                if (md.find("svg[class='inc goal']")):
+                    #print(md.html)
+                    print("{} {} {} {}".format(md.find("div[class=min]")[0].text, md.find("span[data-type=player-name]")[0].text[3:], md.find("span[class=score]")[0].text, md.find("span[data-type=player-name]")[1].text[3:]))
+                    #print(md.find("span[data-type=player-name]")[0].text[3:])    # remove leading short name
+                    #print(md.find("span[class=score]")[0].text)
+                    #print(md.html.find("div[class=min]"))
+                elif (md.find("svg[class='inc goal-own']")):
+                    print(md.html)    # todo - sistemare autogol
         print("------------------------------")
