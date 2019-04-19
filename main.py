@@ -1,7 +1,7 @@
 from requests_html import HTMLSession
 
-#url = "https://www.livescore.com/"
-url = "https://www.livescore.com/soccer/2019-04-18/"
+url = "https://www.livescore.com/"
+#url = "https://www.livescore.com/soccer/2019-04-18/"
 
 user_agent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:63.0) Gecko/20100101 Firefox/63.0"
 
@@ -37,6 +37,7 @@ for l in all_leagues:
             for event in match_events:
                 event_goal = event.find("svg[class='inc goal']")    # contiene solo eventi goal
                 event_own_goal = event.find("svg[class='inc goal-own']")    # contiene solo eventi autogoal
+                event_penalty_goal = event.find("svg[class='inc goal-pen']")    # contiene solo eventi penaly goal
                 if event_goal:    # filtra solo goals
                     event_goal_min = event.find("div[class=min]")[0].text
                     event_goal_partial_score = event.find("span[class=score]")[0].text
@@ -55,5 +56,14 @@ for l in all_leagues:
                         print("{} {} {} {}".format(event_own_goal_min, "(OG)", event_own_goal_home_scorer, event_own_goal_partial_score))
                     else:
                         print("{} {} {} {}".format(event_own_goal_min, event_own_goal_partial_score, "(OG)", event_own_goal_away_scorer))
+                elif event_penalty_goal:    # filtra solo penalty goals
+                    event_penalty_goal_min = event.find("div[class=min]")[0].text
+                    event_penalty_goal_partial_score = event.find("span[class=score]")[0].text
+                    event_penalty_goal_home_scorer = event.find("span[data-type=player-name]")[0].text[3:]    # senza lo short name iniziale
+                    event_penalty_goal_away_scorer = event.find("span[data-type=player-name]")[1].text[3:]    # senza lo short name iniziale
+                    if event_penalty_goal_home_scorer:
+                        print("{} {} {} {}".format(event_penalty_goal_min, "(PEN)", event_penalty_goal_home_scorer, event_penalty_goal_partial_score))
+                    else:
+                        print("{} {} {} {}".format(event_penalty_goal_min, event_penalty_goal_partial_score, "(PEN)", event_penalty_goal_away_scorer))
             print("")
         print("------------------------------")
