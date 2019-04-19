@@ -41,8 +41,12 @@ for l in all_leagues:
                 if event_goal:    # filtra solo goals
                     event_goal_min = event.find("div[class=min]")[0].text
                     event_goal_partial_score = event.find("span[class=score]")[0].text
-                    event_goal_home_scorer = event.find("span[data-type=player-name]")[0].text[3:]    # senza lo short name iniziale
-                    event_goal_away_scorer = event.find("span[data-type=player-name]")[1].text[3:]    # senza lo short name iniziale
+                    if event.find("span[class=visible-inline-xxs]"):   # check esistenza short name
+                        event_goal_home_scorer = event.find("span[data-type=player-name]")[0].text[3:]    # strip short name
+                        event_goal_away_scorer = event.find("span[data-type=player-name]")[1].text[3:]    # strip short name
+                    else:
+                        event_goal_home_scorer = event.find("span[data-type=player-name]")[0].text
+                        event_goal_away_scorer = event.find("span[data-type=player-name]")[1].text
                     if event_goal_home_scorer:
                         print("{} {} {}".format(event_goal_min, event_goal_home_scorer, event_goal_partial_score))
                     else:
@@ -50,8 +54,12 @@ for l in all_leagues:
                 elif event_own_goal:    # filtra solo auto goals
                     event_own_goal_min = event.find("div[class=min]")[0].text
                     event_own_goal_partial_score = event.find("span[class=score]")[0].text
-                    event_own_goal_home_scorer = event.find("span[data-type=player-name]")[0].text[3:]    # senza lo short name iniziale
-                    event_own_goal_away_scorer = event.find("span[data-type=player-name]")[1].text[3:]    # senza lo short name iniziale
+                    if event.find("span[class=visible-inline-xxs]"):   # check esistenza short name
+                        event_own_goal_home_scorer = event.find("span[data-type=player-name]")[0].text[3:]    # strip short name
+                        event_own_goal_away_scorer = event.find("span[data-type=player-name]")[1].text[3:]    # strip short name
+                    else:
+                        event_own_goal_home_scorer = event.find("span[data-type=player-name]")[0].text
+                        event_own_goal_away_scorer = event.find("span[data-type=player-name]")[1].text
                     if event_own_goal_home_scorer:
                         print("{} {} {} {}".format(event_own_goal_min, "(OG)", event_own_goal_home_scorer, event_own_goal_partial_score))
                     else:
@@ -59,8 +67,12 @@ for l in all_leagues:
                 elif event_penalty_goal:    # filtra solo penalty goals
                     event_penalty_goal_min = event.find("div[class=min]")[0].text
                     event_penalty_goal_partial_score = event.find("span[class=score]")[0].text
-                    event_penalty_goal_home_scorer = event.find("span[data-type=player-name]")[0].text[3:]    # senza lo short name iniziale
-                    event_penalty_goal_away_scorer = event.find("span[data-type=player-name]")[1].text[3:]    # senza lo short name iniziale
+                    if event.find("span[class=visible-inline-xxs]"):   # check esistenza short name
+                        event_penalty_goal_home_scorer = event.find("span[data-type=player-name]")[0].text[3:]    # strip short name
+                        event_penalty_goal_away_scorer = event.find("span[data-type=player-name]")[1].text[3:]    # strip short name
+                    else:
+                        event_penalty_goal_home_scorer = event.find("span[data-type=player-name]")[0].text
+                        event_penalty_goal_away_scorer = event.find("span[data-type=player-name]")[1].text
                     if event_penalty_goal_home_scorer:
                         print("{} {} {} {}".format(event_penalty_goal_min, "(PEN)", event_penalty_goal_home_scorer, event_penalty_goal_partial_score))
                     else:
