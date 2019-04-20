@@ -59,12 +59,12 @@ for l in all_leagues:
                         event_own_goal_home_scorer = event.find("span[data-type=player-name]")[0].text
                         if event_own_goal_home_scorer[1] == ".":
                             event_own_goal_home_scorer = event_own_goal_home_scorer[3:]
-                        print("{:>5} {:>25} {} {}".format(event_own_goal_min, "(OG)", event_own_goal_home_scorer, event_own_goal_partial_score))
+                        print("{:>5} {:>25} {}".format(event_own_goal_min, "(OG) " + event_own_goal_home_scorer, event_own_goal_partial_score))
                     else:    # altrimenti marcatore away
                         event_own_goal_away_scorer = event.find("span[data-type=player-name]")[1].text
                         if event_own_goal_away_scorer[1] == ".":
                            event_own_goal_away_scorer = event_own_goal_away_scorer[3:]
-                        print("{:>5} {:>31} {} {}".format(event_own_goal_min, event_own_goal_partial_score, "(OG)", event_own_goal_away_scorer))
+                        print("{:>5} {:>31} {}".format(event_own_goal_min, event_own_goal_partial_score, "(OG) " + event_own_goal_away_scorer))
                 elif event_penalty_goal:    # filtra solo penalty goals
                     event_penalty_goal_min = event.find("div[class=min]")[0].text
                     event_penalty_goal_partial_score = event.find("span[class=score]")[0].text
@@ -72,11 +72,11 @@ for l in all_leagues:
                         event_penalty_goal_home_scorer = event.find("span[data-type=player-name]")[0].text
                         if event_penalty_goal_home_scorer[1] == ".":
                             event_penalty_goal_home_scorer = event_penalty_goal_home_scorer[3:]
-                        print("{:>5} {:>25} {} {}".format(event_penalty_goal_min, "(PEN)", event_penalty_goal_home_scorer, event_penalty_goal_partial_score))
+                        print("{:>5} {:>25} {}".format(event_penalty_goal_min, "(PEN) " + event_penalty_goal_home_scorer, event_penalty_goal_partial_score))
                     else:    # altrimenti marcatore away
                         event_penalty_goal_away_scorer = event.find("span[data-type=player-name]")[1].text
                         if event_penalty_goal_away_scorer[1] == ".":
                            event_penalty_goal_away_scorer = event_penalty_goal_away_scorer[3:]
-                        print("{:>5} {:>31} {} {}".format(event_penalty_goal_min, event_penalty_goal_partial_score, "(PEN)", event_penalty_goal_away_scorer))
+                        print("{:>5} {:>31} {}".format(event_penalty_goal_min, event_penalty_goal_partial_score, "(PEN) " + event_penalty_goal_away_scorer))
             print("")
         print(70 * "-")
