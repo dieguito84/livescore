@@ -19,7 +19,8 @@ for l in all_leagues:
     # league[0] = 'paese - campionato'(England - Premier League) oppure 'competizione - stage'(Europa League - Quarter-finals), league[1] = 'Mese giorno' (April 19)
     league_title = league[0]
     if league_title in top5_national_leagues or any(x in league[0] for x in uefa_club_leagues):
-        print("\n- " + league_title + "\n------------------------------")
+        print("\n- " + league_title)
+        print(70 * "-")
         all_matches = page.html.find("a[data-stg-id='{}']".format(l.attrs["data-stg-id"]))
         for m in all_matches:
             match = m.text.split("\n")
@@ -28,7 +29,7 @@ for l in all_leagues:
             match_home_team = match[2]
             match_away_team = match[4]
             match_result = match[3]
-            print("{:>4} {:>25} {} {}".format(match_time, match_home_team, match_result, match_away_team))
+            print("{:>5} {:>25} {} {}".format(match_time, match_home_team, match_result, match_away_team))
             url2 = "https://www.livescore.com" + m.attrs["href"]
             session2 = HTMLSession()
             page2 = session2.get(url2, headers={"User-Agent": user_agent})
@@ -41,41 +42,41 @@ for l in all_leagues:
                 if event_goal:    # filtra solo goals
                     event_goal_min = event.find("div[class=min]")[0].text
                     event_goal_partial_score = event.find("span[class=score]")[0].text
-                    if event.find("span[class=visible-inline-xxs]"):   # check esistenza short name
-                        event_goal_home_scorer = event.find("span[data-type=player-name]")[0].text[3:]    # strip short name
-                        event_goal_away_scorer = event.find("span[data-type=player-name]")[1].text[3:]    # strip short name
-                    else:
+                    if event.find("div.tright[data-type=home] > span[data-type=player-name]")[0].text:   # se marcatore home
                         event_goal_home_scorer = event.find("span[data-type=player-name]")[0].text
+                        if event_goal_home_scorer[1] == ".":
+                            event_goal_home_scorer = event_goal_home_scorer[3:]
+                        print("{:>5} {:>25} {}".format(event_goal_min, event_goal_home_scorer, event_goal_partial_score))
+                    else:    # altrimenti marcatore away
                         event_goal_away_scorer = event.find("span[data-type=player-name]")[1].text
-                    if event_goal_home_scorer:
-                        print("{:>4} {:>25} {}".format(event_goal_min, event_goal_home_scorer, event_goal_partial_score))
-                    else:
-                        print("{:>4} {:>31} {}".format(event_goal_min, event_goal_partial_score, event_goal_away_scorer))
+                        if event_goal_away_scorer[1] == ".":
+                           event_goal_away_scorer = event_goal_away_scorer[3:]
+                        print("{:>5} {:>31} {}".format(event_goal_min, event_goal_partial_score, event_goal_away_scorer))
                 elif event_own_goal:    # filtra solo auto goals
                     event_own_goal_min = event.find("div[class=min]")[0].text
                     event_own_goal_partial_score = event.find("span[class=score]")[0].text
-                    if event.find("span[class=visible-inline-xxs]"):   # check esistenza short name
-                        event_own_goal_home_scorer = event.find("span[data-type=player-name]")[0].text[3:]    # strip short name
-                        event_own_goal_away_scorer = event.find("span[data-type=player-name]")[1].text[3:]    # strip short name
-                    else:
+                    if event.find("div.tright[data-type=home] > span[data-type=player-name]")[0].text:   # se marcatore home
                         event_own_goal_home_scorer = event.find("span[data-type=player-name]")[0].text
+                        if event_own_goal_home_scorer[1] == ".":
+                            event_own_goal_home_scorer = event_own_goal_home_scorer[3:]
+                        print("{:>5} {:>25} {} {}".format(event_own_goal_min, "(OG)", event_own_goal_home_scorer, event_own_goal_partial_score))
+                    else:    # altrimenti marcatore away
                         event_own_goal_away_scorer = event.find("span[data-type=player-name]")[1].text
-                    if event_own_goal_home_scorer:
-                        print("{:>4} {:>25} {} {}".format(event_own_goal_min, "(OG)", event_own_goal_home_scorer, event_own_goal_partial_score))
-                    else:
-                        print("{:>4} {:>31} {} {}".format(event_own_goal_min, event_own_goal_partial_score, "(OG)", event_own_goal_away_scorer))
+                        if event_own_goal_away_scorer[1] == ".":
+                           event_own_goal_away_scorer = event_own_goal_away_scorer[3:]
+                        print("{:>5} {:>31} {} {}".format(event_own_goal_min, event_own_goal_partial_score, "(OG)", event_own_goal_away_scorer))
                 elif event_penalty_goal:    # filtra solo penalty goals
                     event_penalty_goal_min = event.find("div[class=min]")[0].text
                     event_penalty_goal_partial_score = event.find("span[class=score]")[0].text
-                    if event.find("span[class=visible-inline-xxs]"):   # check esistenza short name
-                        event_penalty_goal_home_scorer = event.find("span[data-type=player-name]")[0].text[3:]    # strip short name
-                        event_penalty_goal_away_scorer = event.find("span[data-type=player-name]")[1].text[3:]    # strip short name
-                    else:
+                    if event.find("div.tright[data-type=home] > span[data-type=player-name]")[0].text:   # se marcatore home
                         event_penalty_goal_home_scorer = event.find("span[data-type=player-name]")[0].text
+                        if event_penalty_goal_home_scorer[1] == ".":
+                            event_penalty_goal_home_scorer = event_penalty_goal_home_scorer[3:]
+                        print("{:>5} {:>25} {} {}".format(event_penalty_goal_min, "(PEN)", event_penalty_goal_home_scorer, event_penalty_goal_partial_score))
+                    else:    # altrimenti marcatore away
                         event_penalty_goal_away_scorer = event.find("span[data-type=player-name]")[1].text
-                    if event_penalty_goal_home_scorer:
-                        print("{:>4} {:>25} {} {}".format(event_penalty_goal_min, "(PEN)", event_penalty_goal_home_scorer, event_penalty_goal_partial_score))
-                    else:
-                        print("{:>4} {:>31} {} {}".format(event_penalty_goal_min, event_penalty_goal_partial_score, "(PEN)", event_penalty_goal_away_scorer))
+                        if event_penalty_goal_away_scorer[1] == ".":
+                           event_penalty_goal_away_scorer = event_penalty_goal_away_scorer[3:]
+                        print("{:>5} {:>31} {} {}".format(event_penalty_goal_min, event_penalty_goal_partial_score, "(PEN)", event_penalty_goal_away_scorer))
             print("")
-        print("------------------------------")
+        print(70 * "-")
