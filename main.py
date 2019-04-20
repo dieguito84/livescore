@@ -28,7 +28,7 @@ for l in all_leagues:
             match_home_team = match[2]
             match_away_team = match[4]
             match_result = match[3]
-            print("{:>3} {} {} {}".format(match_time, match_home_team, match_result, match_away_team))
+            print("{:>4} {:>25} {} {}".format(match_time, match_home_team, match_result, match_away_team))
             url2 = "https://www.livescore.com" + m.attrs["href"]
             session2 = HTMLSession()
             page2 = session2.get(url2, headers={"User-Agent": user_agent})
@@ -48,9 +48,9 @@ for l in all_leagues:
                         event_goal_home_scorer = event.find("span[data-type=player-name]")[0].text
                         event_goal_away_scorer = event.find("span[data-type=player-name]")[1].text
                     if event_goal_home_scorer:
-                        print("{:>3} {} {}".format(event_goal_min, event_goal_home_scorer, event_goal_partial_score))
+                        print("{:>4} {:>25} {}".format(event_goal_min, event_goal_home_scorer, event_goal_partial_score))
                     else:
-                        print("{:>3} {} {}".format(event_goal_min, event_goal_partial_score, event_goal_away_scorer))
+                        print("{:>4} {:>31} {}".format(event_goal_min, event_goal_partial_score, event_goal_away_scorer))
                 elif event_own_goal:    # filtra solo auto goals
                     event_own_goal_min = event.find("div[class=min]")[0].text
                     event_own_goal_partial_score = event.find("span[class=score]")[0].text
@@ -61,9 +61,9 @@ for l in all_leagues:
                         event_own_goal_home_scorer = event.find("span[data-type=player-name]")[0].text
                         event_own_goal_away_scorer = event.find("span[data-type=player-name]")[1].text
                     if event_own_goal_home_scorer:
-                        print("{:>3} {} {} {}".format(event_own_goal_min, "(OG)", event_own_goal_home_scorer, event_own_goal_partial_score))
+                        print("{:>4} {:>25} {} {}".format(event_own_goal_min, "(OG)", event_own_goal_home_scorer, event_own_goal_partial_score))
                     else:
-                        print("{:>3} {} {} {}".format(event_own_goal_min, event_own_goal_partial_score, "(OG)", event_own_goal_away_scorer))
+                        print("{:>4} {:>31} {} {}".format(event_own_goal_min, event_own_goal_partial_score, "(OG)", event_own_goal_away_scorer))
                 elif event_penalty_goal:    # filtra solo penalty goals
                     event_penalty_goal_min = event.find("div[class=min]")[0].text
                     event_penalty_goal_partial_score = event.find("span[class=score]")[0].text
@@ -74,8 +74,8 @@ for l in all_leagues:
                         event_penalty_goal_home_scorer = event.find("span[data-type=player-name]")[0].text
                         event_penalty_goal_away_scorer = event.find("span[data-type=player-name]")[1].text
                     if event_penalty_goal_home_scorer:
-                        print("{:>3} {} {} {}".format(event_penalty_goal_min, "(PEN)", event_penalty_goal_home_scorer, event_penalty_goal_partial_score))
+                        print("{:>4} {:>25} {} {}".format(event_penalty_goal_min, "(PEN)", event_penalty_goal_home_scorer, event_penalty_goal_partial_score))
                     else:
-                        print("{:>3} {} {} {}".format(event_penalty_goal_min, event_penalty_goal_partial_score, "(PEN)", event_penalty_goal_away_scorer))
+                        print("{:>4} {:>31} {} {}".format(event_penalty_goal_min, event_penalty_goal_partial_score, "(PEN)", event_penalty_goal_away_scorer))
             print("")
         print("------------------------------")
