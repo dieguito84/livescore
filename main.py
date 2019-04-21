@@ -1,6 +1,6 @@
 from requests_html import HTMLSession
 
-BASE_URL = "https://www.livescore.com/"
+BASE_URL = "https://www.livescore.com"
 
 USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:63.0) Gecko/20100101 Firefox/63.0"
 
@@ -9,13 +9,23 @@ UEFA_CLUB_LEAGUES = ["Champions League", "Europa League"]
 
 # TODO: add argparse
 
-session = HTMLSession()
-page = session.get(BASE_URL, headers={"User-Agent": USER_AGENT})
-page.html.render()
-
-all_leagues = (page.html.find("div[class='row row-tall'][data-type='stg']")) + (page.html.find("div[class='row row-tall mt4']"))
-
 # TODO: use functions 
+
+def get_html(url, user_agent):
+    '''
+    Returns HTML page as <class 'requests_html.HTML'> object
+
+    Gets HTML page and renders it using requests-html library
+    It supports JavaScript 
+    '''
+    _session = HTMLSession()
+    _page = _session.get(url, headers={"User-Agent": user_agent})
+    _page.html.render()
+    return _page.html
+
+homepage = get_html(BASE_URL, USER_AGENT)
+
+all_leagues = homepage.find("div[class='row row-tall'][data-type='stg']") + homepage.find("div[class='row row-tall mt4']")
 
 for l in all_leagues:
     league = l.text.split("\n")
@@ -24,7 +34,7 @@ for l in all_leagues:
     if league_title in TOP5_NATIONAL_LEAGUES or any(x in league[0] for x in UEFA_CLUB_LEAGUES):
         print("\n- " + league_title)
         print(70 * "-")
-        all_matches = page.html.find("a[data-stg-id='{}']".format(l.attrs["data-stg-id"]))
+        all_matches = homepage.find("a[data-stg-id='{}']".format(l.attrs["data-stg-id"]))
         for m in all_matches:
             match = m.text.split("\n")
             # match[0] = 'orario'(21:00)(prima della partita) oppure 'minuto'(88')(durante la partita) oppure 'FT'(dopo la partita), match[1] = 'Limited coverage', match[2] = 'squadra in casa', match[3] = 'risultato(1 - 0)', match[4] = 'squadra fuori casa'
@@ -33,11 +43,9 @@ for l in all_leagues:
             match_away_team = match[4]
             match_result = match[3]
             print("{:>5} {:>25} {} {}".format(match_time, match_home_team, match_result, match_away_team))
-            url2 = "https://www.livescore.com" + m.attrs["href"]
-            session2 = HTMLSession()
-            page2 = session2.get(url2, headers={"User-Agent": USER_AGENT})
-            page2.html.render()
-            match_events = (page2.html.find("[data-type=incident]"))    # CSS selector
+            match_url = BASE_URL + m.attrs["href"]
+            match_page = get_html(match_url, USER_AGENT)
+            match_events = (match_page.find("[data-type=incident]"))    # CSS selector - contiene solo eventi di tipo incident
             for event in match_events:
                 event_goal = event.find("svg[class='inc goal']")    # contiene solo eventi goal
                 event_own_goal = event.find("svg[class='inc goal-own']")    # contiene solo eventi autogoal
