@@ -1,17 +1,16 @@
 from requests_html import HTMLSession
 
-url = "https://www.livescore.com/"
-#url = "https://www.livescore.com/soccer/2019-04-18/"
+BASE_URL = "https://www.livescore.com/"
 
-user_agent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:63.0) Gecko/20100101 Firefox/63.0"
+USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:63.0) Gecko/20100101 Firefox/63.0"
 
-top5_national_leagues = ["England - Premier League", "Italy - Serie A", "Spain - LaLiga LaLiga Santander", "Germany - Bundesliga", "France - Ligue 1"]
-uefa_club_leagues = ["Champions League", "Europa League"]
+TOP5_NATIONAL_LEAGUES = ["England - Premier League", "Italy - Serie A", "Spain - LaLiga LaLiga Santander", "Germany - Bundesliga", "France - Ligue 1"]
+UEFA_CLUB_LEAGUES = ["Champions League", "Europa League"]
 
 # TODO: add argparse
 
 session = HTMLSession()
-page = session.get(url, headers={"User-Agent": user_agent})
+page = session.get(BASE_URL, headers={"User-Agent": USER_AGENT})
 page.html.render()
 
 all_leagues = (page.html.find("div[class='row row-tall'][data-type='stg']")) + (page.html.find("div[class='row row-tall mt4']"))
@@ -22,7 +21,7 @@ for l in all_leagues:
     league = l.text.split("\n")
     # league[0] = 'paese - campionato'(England - Premier League) oppure 'competizione - stage'(Europa League - Quarter-finals), league[1] = 'Mese giorno' (April 19)
     league_title = league[0]
-    if league_title in top5_national_leagues or any(x in league[0] for x in uefa_club_leagues):
+    if league_title in TOP5_NATIONAL_LEAGUES or any(x in league[0] for x in UEFA_CLUB_LEAGUES):
         print("\n- " + league_title)
         print(70 * "-")
         all_matches = page.html.find("a[data-stg-id='{}']".format(l.attrs["data-stg-id"]))
@@ -36,7 +35,7 @@ for l in all_leagues:
             print("{:>5} {:>25} {} {}".format(match_time, match_home_team, match_result, match_away_team))
             url2 = "https://www.livescore.com" + m.attrs["href"]
             session2 = HTMLSession()
-            page2 = session2.get(url2, headers={"User-Agent": user_agent})
+            page2 = session2.get(url2, headers={"User-Agent": USER_AGENT})
             page2.html.render()
             match_events = (page2.html.find("[data-type=incident]"))    # CSS selector
             for event in match_events:
