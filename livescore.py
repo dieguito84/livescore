@@ -1,16 +1,26 @@
 from requests_html import HTMLSession
 
+BASE_URL = "https://www.livescore.com"
+
+USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:63.0) Gecko/20100101 Firefox/63.0"
+
+TOP5_NATIONAL_LEAGUES = ["England - Premier League", "Italy - Serie A", "Spain - LaLiga LaLiga Santander", "Germany - Bundesliga", "France - Ligue 1"]
+UEFA_CLUB_LEAGUES = ["Champions League", "Europa League"]
+
 class LiveScore():
     
-    def get_html(self, url, user_agent):
+    def get_html(self, partial_url="", user_agent=USER_AGENT):
         '''
-        Returns HTML page as <class 'requests_html.HTML'> object
+        Returns HTML page as <class 'requests_html.HTML'> object.
 
-        Gets HTML page and renders it using requests-html library
-        It supports JavaScript 
+        Retrieve HTML page and renders it using requests-html library.
+        It supports JavaScript.
+        
+        :param partial_url: partial url to add to base url (https://www.livescore.com). Optional.
+        :param user_agent: browser user agent. Optional.
         '''
         self._session = HTMLSession()
-        self._page = self._session.get(url, headers={"User-Agent": user_agent})
+        self._page = self._session.get(BASE_URL + partial_url, headers={"User-Agent": user_agent})
         self._page.html.render()
         return self._page.html
 
