@@ -1,3 +1,5 @@
+from requests_html import HTMLSession
+
 class LiveScore():
     
     def get_html(self, url, user_agent):
@@ -7,10 +9,10 @@ class LiveScore():
         Gets HTML page and renders it using requests-html library
         It supports JavaScript 
         '''
-        _session = HTMLSession()
-        _page = _session.get(url, headers={"User-Agent": user_agent})
-        _page.html.render()
-        return _page.html
+        self._session = HTMLSession()
+        self._page = self._session.get(url, headers={"User-Agent": user_agent})
+        self._page.html.render()
+        return self._page.html
 
     def event_parser(self, event):
         if event.find("svg[class='inc goal']"):

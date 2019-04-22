@@ -1,4 +1,4 @@
-from requests_html import HTMLSession
+from livescore import LiveScore
 
 BASE_URL = "https://www.livescore.com"
 
@@ -11,19 +11,20 @@ UEFA_CLUB_LEAGUES = ["Champions League", "Europa League"]
 
 # TODO: use functions 
 
-def get_html(url, user_agent):
-    '''
-    Returns HTML page as <class 'requests_html.HTML'> object
+# def get_html(url, user_agent):
+#     '''
+#     Returns HTML page as <class 'requests_html.HTML'> object
 
-    Gets HTML page and renders it using requests-html library
-    It supports JavaScript 
-    '''
-    _session = HTMLSession()
-    _page = _session.get(url, headers={"User-Agent": user_agent})
-    _page.html.render()
-    return _page.html
+#     Gets HTML page and renders it using requests-html library
+#     It supports JavaScript 
+#     '''
+#     _session = HTMLSession()
+#     _page = _session.get(url, headers={"User-Agent": user_agent})
+#     _page.html.render()
+#     return _page.html
 
-homepage = get_html(BASE_URL, USER_AGENT)
+ls = LiveScore()
+homepage = ls.get_html(BASE_URL, USER_AGENT)
 
 all_leagues = homepage.find("div[class='row row-tall'][data-type='stg']") + homepage.find("div[class='row row-tall mt4']")
 
@@ -44,7 +45,7 @@ for l in all_leagues:
             match_result = match[3]
             print("{:>5} {:>25} {} {}".format(match_time, match_home_team, match_result, match_away_team))
             match_url = BASE_URL + m.attrs["href"]
-            match_page = get_html(match_url, USER_AGENT)
+            match_page = ls.get_html(match_url, USER_AGENT)
             match_events = (match_page.find("[data-type=incident]"))    # CSS selector - contiene solo eventi di tipo incident
             for event in match_events:
                 event_goal = event.find("svg[class='inc goal']")    # contiene solo eventi goal
