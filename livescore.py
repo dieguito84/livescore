@@ -53,3 +53,28 @@ class LiveScore():
 
     def pen_goal_parser(self, event):
         pass
+
+'''
+example of dictionary (JSON format) to return as match result
+
+{
+    "time": "21:00" / "88'" / "FT",
+    "home_team": "Juventus",
+    "away_team": "Fiorentina",
+    "result": "2 - 1"
+}
+
+'''
+
+'''
+example of dictionary (JSON format) to return as goal event
+
+{
+    "goal_type": "goal" / "own-goal" / "pen-goal",
+    "min": "88'",
+    "partial_score": "1 - 0",
+    "scorer_type": "home" / "away",
+    "scorer_name": "Roberto Baggio"
+}
+
+'''
