@@ -23,6 +23,15 @@ class LiveScore():
         self._page = self._session.get(BASE_URL + partial_url, headers={"User-Agent": user_agent})
         self._page.html.render()
         return self._page.html
+    
+    def league_finder(self, homepage):
+        all_leagues = homepage.find("div[class='row row-tall'][data-type='stg']") + homepage.find("div[class='row row-tall mt4']")
+        for l in all_leagues:
+            league = l.text.split("\n")
+            # league[0] = 'paese - campionato'(England - Premier League) oppure 'competizione - stage'(Europa League - Quarter-finals), league[1] = 'Mese giorno' (April 19)
+            league_title = league[0]
+        if league_title in TOP5_NATIONAL_LEAGUES or any(x in league[0] for x in UEFA_CLUB_LEAGUES):
+            print("\n- " + league_title)
 
     def event_parser(self, event):
         if event.find("svg[class='inc goal']"):
