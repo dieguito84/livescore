@@ -1,7 +1,5 @@
 from livescore import LiveScore
 
-BASE_URL = "https://www.livescore.com"
-
 TOP5_NATIONAL_LEAGUES = ["England - Premier League", "Italy - Serie A", "Spain - LaLiga LaLiga Santander", "Germany - Bundesliga", "France - Ligue 1"]
 UEFA_CLUB_LEAGUES = ["Champions League", "Europa League"]
 
