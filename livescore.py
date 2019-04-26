@@ -33,10 +33,13 @@ class LiveScore():
             # league[0] = 'paese - campionato'(England - Premier League) oppure 'competizione - stage'(Europa League - Quarter-finals), league[1] = 'Mese giorno' (April 19)
             self.league_title = self.league[0]
             if self.league_title in TOP5_NATIONAL_LEAGUES or any(x in self.league[0] for x in UEFA_CLUB_LEAGUES):
-                self.leagues_names.append(league_title)
+                self.leagues_names.append(self.league_title)
                 self.leagues_elements.append(l)
         self.leagues_names_and_elements = zip(self.leagues_names, self.leagues_elements)
         return self.leagues_names_and_elements
+    
+    def matches_finder(self, page, league):
+        pass
 
     def event_parser(self, event):
         if event.find("svg[class='inc goal']"):
