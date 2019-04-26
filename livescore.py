@@ -40,6 +40,9 @@ class LiveScore():
     
     def matches_finder(self, page, league):
         pass
+    
+    def match_parser(self, match):
+        pass
 
     def event_parser(self, event):
         if event.find("svg[class='inc goal']"):
