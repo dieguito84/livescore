@@ -44,29 +44,29 @@ class LiveScore():
     def match_parser(self, match):
         pass
 
-    def event_parser(self, event):
+    def goal_finder(self, event):
         if event.find("svg[class='inc goal']"):
-            return "goal", goal_parser(event)
+            return ["goal", event]
         elif event.find("svg[class='inc goal-own']"):
-            return "goal-own", own_goal_parser(event)
+            return ["goal-own", event]
         elif event.find("svg[class='inc goal-pen']"):
-            return "goal-pen", pen_goal_parser(event)
+            return ["goal-pen", event]
 
-    def goal_parser(self, event):
-        event_goal_min = event.find("div[class=min]")[0].text
-        event_goal_partial_score = event.find("span[class=score]")[0].text
-        if event.find("div.tright[data-type=home] > span[data-type=player-name]")[0].text:   # se marcatore home
-            event_goal_home_scorer = event.find("span[data-type=player-name]")[0].text
-            if event_goal_home_scorer[4] == ".":
-                event_goal_home_scorer = event_goal_home_scorer[6:]
-            elif event_goal_home_scorer[1] == ".":
-                event_goal_home_scorer = event_goal_home_scorer[3:]
+    def goal_parser(self, goal):
+        self.goal_min = goal.find("div[class=min]")[0].text
+        self.goal_partial_score = goal.find("span[class=score]")[0].text
+        if goal.find("div.tright[data-type=home] > span[data-type=player-name]")[0].text:   # se marcatore home
+            self.goal_home_scorer = goal.find("span[data-type=player-name]")[0].text
+            if self.goal_home_scorer[4] == ".":
+                self.goal_home_scorer = self.goal_home_scorer[6:]
+            elif self.goal_home_scorer[1] == ".":
+                self.goal_home_scorer = self.goal_home_scorer[3:]
         else:    # altrimenti marcatore away
-            event_goal_away_scorer = event.find("span[data-type=player-name]")[1].text
-            if event_goal_away_scorer[4] == ".":
-                event_goal_away_scorer = event_goal_away_scorer[6:]
-            elif event_goal_away_scorer[1] == ".":
-                event_goal_away_scorer = event_goal_away_scorer[3:]
+            self.goal_away_scorer = goal.find("span[data-type=player-name]")[1].text
+            if self.goal_away_scorer[4] == ".":
+                self.goal_away_scorer = self.goal_away_scorer[6:]
+            elif self.goal_away_scorer[1] == ".":
+                self.goal_away_scorer = self.goal_away_scorer[3:]
 
     def own_goal_parser(self, event):
         pass
