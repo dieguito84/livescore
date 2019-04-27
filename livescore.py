@@ -26,8 +26,8 @@ class LiveScore():
     
     def leagues_finder(self, page):
         '''
-        Returns a nested list containing where each element is a
-        couple of league title and HTML page as <class 'requests_html.HTML'> object.
+        Returns a nested list where each element is a tuple containing
+        league title and HTML page as <class 'requests_html.HTML'> object.
 
         [(England - Premier League, requests_html.HTML), (Italy - Serie A, requests_html.HTML), ...]
 
