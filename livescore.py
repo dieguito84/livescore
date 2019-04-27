@@ -25,6 +25,14 @@ class LiveScore():
         return self._page.html
     
     def leagues_finder(self, page):
+        '''
+        Returns a nested list containing where each element is a
+        couple of league title and HTML page as <class 'requests_html.HTML'> object.
+
+        [(England - Premier League, requests_html.HTML), (Italy - Serie A, requests_html.HTML), ...]
+
+        :param page: HTML page obtained via get_html method. Required.
+        '''
         self.all_leagues = page.find("div[class='row row-tall'][data-type='stg']") + page.find("div[class='row row-tall mt4']")
         self.leagues_names = []
         self.leagues_elements = []
