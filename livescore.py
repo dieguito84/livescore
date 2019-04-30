@@ -53,7 +53,8 @@ class LiveScore():
         :param page: HTML page obtained via get_html method. Required.
         :param league: HTML page obtained via leagues_finder method. Required. 
         '''
-        return page.find("a[data-stg-id='{}']".format(league.attrs["data-stg-id"]))
+        self.all_matches = page.find("a[data-stg-id='{}']".format(league.attrs["data-stg-id"]))
+        return self.all_matches
     
     def match_parser(self, match):
         pass
