@@ -59,8 +59,15 @@ class LiveScore():
     def match_parser(self, match):
         pass
     
-    def event_finder(self, page):
-        pass
+    def event_finder(self, match_page):
+        '''
+        Returns a list containing HTML elements for every event of a match.
+
+        :param page: HTML page obtained via get_html method. Required.
+        :param league: HTML page obtained via leagues_finder method. Required. 
+        '''
+        self.match_events = match_page.find("[data-type=incident]")    # CSS selector - contiene solo eventi di tipo incident
+        return self.match_events
     
     def goal_finder(self, event):
         if event.find("svg[class='inc goal']"):
