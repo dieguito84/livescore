@@ -19,10 +19,10 @@ class LiveScore():
         :param partial_url: partial url to add to base url (https://www.livescore.com). Optional.
         :param user_agent: browser user agent. Optional.
         '''
-        self._session = HTMLSession()
-        self._page = self._session.get(BASE_URL + partial_url, headers={"User-Agent": user_agent})
-        self._page.html.render()
-        return self._page.html
+        self.session = HTMLSession()
+        self.page = self.session.get(BASE_URL + partial_url, headers={"User-Agent": user_agent})
+        self.page.html.render()
+        return self.page.html
     
     def leagues_finder(self, page):
         '''
