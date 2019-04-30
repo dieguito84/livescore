@@ -24,7 +24,7 @@ class LiveScore():
         self.page.html.render()
         return self.page.html
     
-    def leagues_finder(self, page):
+    def leagues_finder(self, homepage_html):
         '''
         Returns a nested list where each element is a tuple containing
         league title and HTML page as <class 'requests_html.HTML'> object.
@@ -33,7 +33,7 @@ class LiveScore():
 
         :param page: HTML page obtained via get_html method. Required.
         '''
-        self.all_leagues = page.find("div[class='row row-tall'][data-type='stg']") + page.find("div[class='row row-tall mt4']")
+        self.all_leagues = homepage_html.find("div[class='row row-tall'][data-type='stg']") + homepage_html.find("div[class='row row-tall mt4']")
         self.leagues_names = []
         self.leagues_elements = []
         for l in self.all_leagues:
@@ -46,27 +46,27 @@ class LiveScore():
         self.leagues_names_and_elements = zip(self.leagues_names, self.leagues_elements)
         return self.leagues_names_and_elements    # nested list
     
-    def matches_finder(self, page, league):
+    def matches_finder(self, homepage_html, league_html):
         '''
         Returns a list containing HTML elements for every match of a league.
 
         :param page: HTML page obtained via get_html method. Required.
         :param league: HTML page obtained via leagues_finder method. Required. 
         '''
-        self.all_matches = page.find("a[data-stg-id='{}']".format(league.attrs["data-stg-id"]))
+        self.all_matches = homepage_html.find("a[data-stg-id='{}']".format(league_html.attrs["data-stg-id"]))
         return self.all_matches
     
     def match_parser(self, match):
         pass
     
-    def event_finder(self, match_page):
+    def event_finder(self, match_html):
         '''
         Returns a list containing HTML elements for every event of a match.
 
         :param page: HTML page obtained via get_html method. Required.
         :param league: HTML page obtained via leagues_finder method. Required. 
         '''
-        self.match_events = match_page.find("[data-type=incident]")    # CSS selector - contiene solo eventi di tipo incident
+        self.match_events = match_html.find("[data-type=incident]")    # CSS selector - contiene solo eventi di tipo incident
         return self.match_events
     
     def goal_finder(self, event):
