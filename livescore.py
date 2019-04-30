@@ -44,10 +44,16 @@ class LiveScore():
                 self.leagues_names.append(self.league_title)
                 self.leagues_elements.append(l)
         self.leagues_names_and_elements = zip(self.leagues_names, self.leagues_elements)
-        return self.leagues_names_and_elements
+        return self.leagues_names_and_elements    # nested list
     
     def matches_finder(self, page, league):
-        pass
+        '''
+        Returns a list containing HTML elements for every match of a league.
+
+        :param page: HTML page obtained via get_html method. Required.
+        :param league: HTML page obtained via leagues_finder method. Required. 
+        '''
+        return page.find("a[data-stg-id='{}']".format(league.attrs["data-stg-id"]))
     
     def match_parser(self, match):
         pass
