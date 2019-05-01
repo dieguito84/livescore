@@ -57,7 +57,21 @@ class LiveScore():
         return self.all_matches
     
     def match_parser(self, match):
-        pass
+        '''
+        Return a list containing details of a match: time, home team, away team, result and match's partial url.
+
+        [self.match_time, self.match_home_team, self.match_away_team, self.match_result, self.match_partial_url]
+
+        :param match: single match HTML element. Required.
+        '''
+        self.match = match.text.split("\n")
+        # match[0] = 'orario'(21:00)(prima della partita) oppure 'minuto'(88')(durante la partita) oppure 'FT'(dopo la partita), match[1] = 'Limited coverage', match[2] = 'squadra in casa', match[3] = 'risultato(1 - 0)', match[4] = 'squadra fuori casa'
+        self.match_time = self.match[0]
+        self.match_home_team = self.match[2]
+        self.match_away_team = self.match[4]
+        self.match_result = self.match[3]
+        self.match_partial_url = self.match.attrs["href"]
+        return [self.match_time, self.match_home_team, self.match_away_team, self.match_result, self.match_partial_url]
     
     def event_finder(self, match_html):
         '''
