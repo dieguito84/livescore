@@ -11,7 +11,7 @@ class LiveScore():
     
     def get_html(self, partial_url="", user_agent=USER_AGENT):
         '''
-        Returns HTML page as <class 'requests_html.HTML'> object.
+        Return HTML page as <class 'requests_html.HTML'> object.
 
         Retrieve HTML page and renders it using requests-html library.
         It supports JavaScript.
@@ -26,7 +26,7 @@ class LiveScore():
     
     def leagues_finder(self, homepage_html):
         '''
-        Returns a nested list where each element is a tuple containing
+        Return a nested list where each element is a tuple containing
         league title and HTML page as <class 'requests_html.HTML'> object.
 
         [(England - Premier League, requests_html.HTML), (Italy - Serie A, requests_html.HTML), ...]
@@ -48,7 +48,7 @@ class LiveScore():
     
     def matches_finder(self, homepage_html, league_html):
         '''
-        Returns a list containing HTML elements for every match of a league.
+        Return a list containing HTML elements for every match of a league.
 
         :param page: HTML page obtained via get_html method. Required.
         :param league: HTML page obtained via leagues_finder method. Required. 
@@ -61,7 +61,7 @@ class LiveScore():
     
     def event_finder(self, match_html):
         '''
-        Returns a list containing HTML elements for every event of a match.
+        Return a list containing HTML elements for every event of a match.
 
         :param page: HTML page obtained via get_html method. Required.
         :param league: HTML page obtained via leagues_finder method. Required. 
@@ -70,6 +70,11 @@ class LiveScore():
         return self.match_events
     
     def goal_finder(self, event):
+        '''
+        Return a list containing goal type and event itself (as HTML code).
+
+        :param event: HTML page obtained via event_finder method. Required.
+        '''
         if event.find("svg[class='inc goal']"):
             return ["goal", event]
         elif event.find("svg[class='inc goal-own']"):
