@@ -124,12 +124,6 @@ class LiveScore():
                 self.goal_away_scorer = self.goal_away_scorer[3:]
             return [goal_type, self.goal_min, self.goal_partial_score, "away", self.goal_away_scorer]
 
-    def own_goal_parser(self, event):
-        pass
-
-    def pen_goal_parser(self, event):
-        pass
-
 '''
 example of dictionary (JSON format) to return as match result
 
