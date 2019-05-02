@@ -97,6 +97,15 @@ class LiveScore():
             return ["goal-pen", event]
 
     def goal_parser(self, goal):
+        '''
+        Return a list containing goal type, time, partial result, scorer type, scorer name.
+
+        ["goal", self.goal_min, self.goal_partial_score, "home", self.goal_home_scorer]
+
+        ["goal", self.goal_min, self.goal_partial_score, "away", self.goal_home_scorer]
+
+        :param goal: HTML page obtained via goal_finder method. Required.
+        '''
         self.goal_min = goal.find("div[class=min]")[0].text
         self.goal_partial_score = goal.find("span[class=score]")[0].text
         if goal.find("div.tright[data-type=home] > span[data-type=player-name]")[0].text:   # se marcatore home
@@ -105,12 +114,14 @@ class LiveScore():
                 self.goal_home_scorer = self.goal_home_scorer[6:]
             elif self.goal_home_scorer[1] == ".":
                 self.goal_home_scorer = self.goal_home_scorer[3:]
+            return ["goal", self.goal_min, self.goal_partial_score, "home", self.goal_home_scorer]
         else:    # altrimenti marcatore away
             self.goal_away_scorer = goal.find("span[data-type=player-name]")[1].text
             if self.goal_away_scorer[4] == ".":
                 self.goal_away_scorer = self.goal_away_scorer[6:]
             elif self.goal_away_scorer[1] == ".":
                 self.goal_away_scorer = self.goal_away_scorer[3:]
+            return ["goal", self.goal_min, self.goal_partial_score, "away", self.goal_home_scorer]
 
     def own_goal_parser(self, event):
         pass
