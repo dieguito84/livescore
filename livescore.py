@@ -124,27 +124,35 @@ class LiveScore():
                 self.goal_away_scorer = self.goal_away_scorer[3:]
             return [goal_type, self.goal_min, self.goal_partial_score, "away", self.goal_away_scorer]
 
-'''
-example of dictionary (JSON format) to return as match result
+    def match_details(self):
+        '''
+        Return a dictionary containing match result details.
 
-{
-    "time": "21:00" / "88'" / "FT",
-    "home_team": "Juventus",
-    "away_team": "Fiorentina",
-    "result": "2 - 1"
-}
+        example of dictionary (JSON format) to return as match result
 
-'''
+        {
+            "time": "21:00" / "88'" / "FT",
+            "home_team": "Juventus",
+            "away_team": "Fiorentina",
+            "result": "2 - 1"
+        }
 
-'''
-example of dictionary (JSON format) to return as goal event
+        '''
+        pass
 
-{
-    "goal_type": "goal" / "own-goal" / "pen-goal",
-    "min": "88'",
-    "partial_score": "1 - 0",
-    "scorer_type": "home" / "away",
-    "scorer_name": "Roberto Baggio"
-}
+    def goal_details(self):
+        '''
+        Return a dictionary containing goal event details.
 
-'''
+        example of dictionary (JSON format) to return as goal event
+
+        {
+            "goal_type": "goal" / "own-goal" / "pen-goal",
+            "min": "88'",
+            "partial_score": "1 - 0",
+            "scorer_type": "home" / "away",
+            "scorer_name": "Roberto Baggio"
+        }
+
+        '''
+        pass
