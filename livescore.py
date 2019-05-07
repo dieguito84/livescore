@@ -7,8 +7,16 @@ USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:63.0) Gecko/20100101 F
 TOP5_NATIONAL_LEAGUES = ["England - Premier League", "Italy - Serie A", "Spain - LaLiga LaLiga Santander", "Germany - Bundesliga", "France - Ligue 1"]
 UEFA_CLUB_LEAGUES = ["Champions League", "Europa League"]
 
+# TODO: add a method to print results and goals details
+
+# TODO: add argparse
+
 def main():
-    pass
+    ls = LiveScore()
+    homepage = ls.get_html()
+
+    for element in ls.leagues_finder(homepage):
+        print(ls.matches_finder(homepage, element[1]))
 
 class LiveScore():
     
