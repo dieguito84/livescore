@@ -111,17 +111,19 @@ class LiveScore():
         self.goal_partial_score = goal.find("span[class=score]")[0].text
         if goal.find("div.tright[data-type=home] > span[data-type=player-name]")[0].text:   # se marcatore home
             self.goal_home_scorer = goal.find("span[data-type=player-name]")[0].text
-            if self.goal_home_scorer[4] == ".":
-                self.goal_home_scorer = self.goal_home_scorer[6:]
-            elif self.goal_home_scorer[1] == ".":
-                self.goal_home_scorer = self.goal_home_scorer[3:]
+            if len(self.goal_home_scorer) > 4:    # to prevent index out of range for player name <= 4 characters
+                if self.goal_home_scorer[4] == ".":
+                    self.goal_home_scorer = self.goal_home_scorer[6:]
+                elif self.goal_home_scorer[1] == ".":
+                    self.goal_home_scorer = self.goal_home_scorer[3:]
             return [goal_type, self.goal_min, self.goal_partial_score, "home", self.goal_home_scorer]
         else:    # altrimenti marcatore away
             self.goal_away_scorer = goal.find("span[data-type=player-name]")[1].text
-            if self.goal_away_scorer[4] == ".":
-                self.goal_away_scorer = self.goal_away_scorer[6:]
-            elif self.goal_away_scorer[1] == ".":
-                self.goal_away_scorer = self.goal_away_scorer[3:]
+            if len(self.goal_away_scorer) > 4:    # to prevent index out of range for player name <= 4 characters
+                if self.goal_away_scorer[4] == ".":
+                    self.goal_away_scorer = self.goal_away_scorer[6:]
+                elif self.goal_away_scorer[1] == ".":
+                    self.goal_away_scorer = self.goal_away_scorer[3:]
             return [goal_type, self.goal_min, self.goal_partial_score, "away", self.goal_away_scorer]
 
     def match_details(self):
