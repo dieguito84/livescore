@@ -7,6 +7,9 @@ USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:63.0) Gecko/20100101 F
 TOP5_NATIONAL_LEAGUES = ["England - Premier League", "Italy - Serie A", "Spain - LaLiga LaLiga Santander", "Germany - Bundesliga", "France - Ligue 1"]
 UEFA_CLUB_LEAGUES = ["Champions League", "Europa League"]
 
+def main():
+    pass
+
 class LiveScore():
     
     def get_html(self, partial_url="", user_agent=USER_AGENT):
@@ -158,3 +161,6 @@ class LiveScore():
 
         '''
         pass
+
+if __name__ == "__main__":
+    main()
