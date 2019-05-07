@@ -47,7 +47,7 @@ class LiveScore():
                 self.leagues_names.append(self.league_title)
                 self.leagues_elements.append(l)
         self.leagues_names_and_elements = zip(self.leagues_names, self.leagues_elements)
-        return self.leagues_names_and_elements    # nested list
+        return list(self.leagues_names_and_elements)    # nested list
     
     def matches_finder(self, homepage_html, league_html):
         '''
