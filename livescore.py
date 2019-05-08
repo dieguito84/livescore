@@ -15,8 +15,12 @@ def main():
     ls = LiveScore()
     homepage = ls.get_html()
 
-    for element in ls.leagues_finder(homepage):
-        print(ls.matches_finder(homepage, element[1]))
+    leagues = ls.leagues_finder(homepage)
+
+    for matches in leagues:
+        print(ls.matches_finder(homepage, matches[1]))
+        #print(ls.matches_finder(homepage, matches[1])[0])
+        #print(ls.match_parser(ls.matches_finder(homepage, matches[1])[0]))
 
 class LiveScore():
     
