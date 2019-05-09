@@ -11,17 +11,6 @@ UEFA_CLUB_LEAGUES = ["Champions League", "Europa League"]
 
 # TODO: add argparse
 
-def main():
-    ls = LiveScore()
-    homepage = ls.get_html()
-
-    leagues = ls.leagues_finder(homepage)
-
-    for matches in leagues:
-        print(ls.matches_finder(homepage, matches[1]))
-        #print(ls.matches_finder(homepage, matches[1])[0])
-        #print(ls.match_parser(ls.matches_finder(homepage, matches[1])[0]))
-
 class LiveScore():
     
     def get_html(self, partial_url="", user_agent=USER_AGENT):
@@ -173,6 +162,18 @@ class LiveScore():
 
         '''
         pass
+
+def main():
+    ls = LiveScore()
+    homepage = ls.get_html()
+
+    leagues = ls.leagues_finder(homepage)
+
+    for matches in leagues:
+        print(ls.matches_finder(homepage, matches[1]))
+        for i in range(len(ls.matches_finder(homepage, matches[1]))):
+            print(ls.matches_finder(homepage, matches[1])[i])
+        #print(ls.match_parser(ls.matches_finder(homepage, matches[1])[0]))
 
 if __name__ == "__main__":
     main()
