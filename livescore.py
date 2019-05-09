@@ -179,6 +179,7 @@ def main():
             print(ls.event_finder(match_page))
             for incident in ls.event_finder(match_page):
                 print(ls.goal_finder(incident))
+                print(ls.goal_parser(ls.goal_finder(incident)[0], ls.goal_finder(incident)[1]))    # problema con oggetti None
         #print(ls.match_parser(ls.matches_finder(homepage, matches[1])[0]))
 
 if __name__ == "__main__":
