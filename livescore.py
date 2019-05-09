@@ -85,7 +85,7 @@ class LiveScore():
         self.match_home_team = self.match[2]
         self.match_away_team = self.match[4]
         self.match_result = self.match[3]
-        self.match_partial_url = self.match.attrs["href"]
+        self.match_partial_url = match.attrs["href"]
         return [self.match_time, self.match_home_team, self.match_away_team, self.match_result, self.match_partial_url]
     
     def event_finder(self, match_html):
