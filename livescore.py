@@ -176,6 +176,9 @@ def main():
             print(ls.match_parser(ls.matches_finder(homepage, matches[1])[i]))
             match_page = ls.get_html(ls.match_parser(ls.matches_finder(homepage, matches[1])[i])[4])
             print(match_page)
+            print(ls.event_finder(match_page))
+            for incident in ls.event_finder(match_page):
+                print(ls.goal_finder(incident))
         #print(ls.match_parser(ls.matches_finder(homepage, matches[1])[0]))
 
 if __name__ == "__main__":
