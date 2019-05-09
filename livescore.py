@@ -81,8 +81,7 @@ class LiveScore():
         '''
         Return a list containing HTML elements for every event of a match.
 
-        :param page: HTML page obtained via get_html method. Required.
-        :param league: HTML page obtained via leagues_finder method. Required. 
+        :param match_html: HTML page obtained via get_html method, using match's partial URL as parameter. Required.
         '''
         self.match_events = match_html.find("[data-type=incident]")    # CSS selector - contiene solo eventi di tipo incident
         return self.match_events
