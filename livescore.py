@@ -98,6 +98,7 @@ class LiveScore():
             return ["goal-own", event]
         elif event.find("svg[class='inc goal-pen']"):
             return ["goal-pen", event]
+        # TODO: add explicit else statement (return "other-event")
 
     def goal_parser(self, goal_type, goal):
         '''
@@ -180,6 +181,7 @@ def main():
             for incident in ls.event_finder(match_page):
                 print(ls.goal_finder(incident))
                 if ls.goal_finder(incident) is not None:    # to exclude None object coming from goal_finder (implicit else)
+                    # TODO: add management of explicit else statement (if ls.goal_finder(incident) is not "other-event")
                     print(ls.goal_parser(ls.goal_finder(incident)[0], ls.goal_finder(incident)[1]))
 
 if __name__ == "__main__":
