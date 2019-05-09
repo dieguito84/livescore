@@ -35,7 +35,7 @@ class LiveScore():
 
         [(England - Premier League, requests_html.HTML), (Italy - Serie A, requests_html.HTML), ...]
 
-        :param page: HTML page obtained via get_html method. Required.
+        :param homepage_html: HTML page obtained via get_html method. Required.
         '''
         self.all_leagues = homepage_html.find("div[class='row row-tall'][data-type='stg']") + homepage_html.find("div[class='row row-tall mt4']")
         self.leagues_names = []
