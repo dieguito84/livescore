@@ -170,9 +170,11 @@ def main():
     leagues = ls.leagues_finder(homepage)
 
     for matches in leagues:
+        print(matches[0])
         print(ls.matches_finder(homepage, matches[1]))
         for i in range(len(ls.matches_finder(homepage, matches[1]))):
             print(ls.matches_finder(homepage, matches[1])[i])
+            print(ls.match_parser(ls.matches_finder(homepage, matches[1])[i]))
         #print(ls.match_parser(ls.matches_finder(homepage, matches[1])[0]))
 
 if __name__ == "__main__":
