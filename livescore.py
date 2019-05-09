@@ -175,6 +175,8 @@ def main():
         for i in range(len(ls.matches_finder(homepage, matches[1]))):
             print(ls.matches_finder(homepage, matches[1])[i])
             print(ls.match_parser(ls.matches_finder(homepage, matches[1])[i]))
+            match_page = ls.get_html(ls.match_parser(ls.matches_finder(homepage, matches[1])[i])[4])
+            print(match_page)
         #print(ls.match_parser(ls.matches_finder(homepage, matches[1])[0]))
 
 if __name__ == "__main__":
