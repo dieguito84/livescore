@@ -9,8 +9,9 @@ UEFA_CLUB_LEAGUES = ["Champions League", "Europa League"]
 
 # TODO: add methods to print results and goals details
 # TODO: add methods to return results and goals details as dictionaries (JSON format)
-# TODO: add argparse
+# TODO: add argparse for simple text output, JSON format output
 # TODO: fix "Champions League" and "Europa League" filter (atm got selected also Africa/Asia/Oceania Champions League and single countries Europa League play-offs)
+# TODO: add favourite team and favourite player
 
 class LiveScore():
     
