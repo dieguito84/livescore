@@ -8,7 +8,7 @@ TOP5_NATIONAL_LEAGUES = ["England - Premier League", "Italy - Serie A", "Spain -
 UEFA_CLUB_LEAGUES = ["Champions League", "Europa League"]
 
 # TODO: add methods to print results and goals details
-# TODO: add methods to return results and goals details as dictionaries (JSON format)
+# TODO: add methods to return complete match details (result + goals) as dictionary (JSON format)
 # TODO: add argparse for simple text output (short and detailed) and JSON format output (short and detailed)
 # TODO: fix "Champions League" and "Europa League" filter (atm got selected also Africa/Asia/Oceania Champions League and single countries Europa League play-offs)
 # TODO: add favourite team and favourite player
@@ -171,7 +171,7 @@ class LiveScore():
         goal_dict = {}
         goal_dict["goal_type"] = details[0]
         goal_dict["min"] = details[1]
-        goal_dict["partial_Score"] = details[2]
+        goal_dict["partial_score"] = details[2]
         goal_dict["scorer_type"] = details[3]
         goal_dict["scorer_name"] = details[4]
         return goal_dict
