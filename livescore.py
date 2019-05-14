@@ -185,6 +185,7 @@ class LiveScore():
 def main():
     ls = LiveScore()
     homepage = ls.get_html()
+    #homepage = ls.get_html("/soccer/2019-05-13/")    # to execute tests when there are no events today
 
     leagues = ls.leagues_finder(homepage)
 
