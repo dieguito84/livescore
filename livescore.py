@@ -146,7 +146,12 @@ class LiveScore():
         }
 
         '''
-        pass
+        match_dict = {}
+        match_dict["time"] = details[0]
+        match_dict["home_team"] = details[1]
+        match_dict["away_team"] = details[2]
+        match_dict["result"] = details[3]
+        return match_dict
 
     def goal_details(self, details):
         '''
