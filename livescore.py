@@ -132,7 +132,7 @@ class LiveScore():
                     self.goal_away_scorer = self.goal_away_scorer[3:]
             return [goal_type, self.goal_min, self.goal_partial_score, "away", self.goal_away_scorer]
 
-    def match_details(self):
+    def match_details(self, details):
         '''
         Return a dictionary containing match result details.
 
@@ -148,7 +148,7 @@ class LiveScore():
         '''
         pass
 
-    def goal_details(self):
+    def goal_details(self, details):
         '''
         Return a dictionary containing goal event details.
 
