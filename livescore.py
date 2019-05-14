@@ -197,6 +197,7 @@ def main():
                 if ls.goal_finder(incident) is not None:    # to exclude None object coming from goal_finder (implicit else)
                     # TODO: add management of explicit else statement (if ls.goal_finder(incident) is not "other-event")
                     print(ls.goal_parser(ls.goal_finder(incident)[0], ls.goal_finder(incident)[1]))
+                    print(ls.goal_details(ls.goal_parser(ls.goal_finder(incident)[0], ls.goal_finder(incident)[1])))    # print goal details json format test
 
 if __name__ == "__main__":
     main()
