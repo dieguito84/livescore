@@ -168,7 +168,13 @@ class LiveScore():
         }
 
         '''
-        pass
+        goal_dict = {}
+        goal_dict["goal_type"] = details[0]
+        goal_dict["min"] = details[1]
+        goal_dict["partial_Score"] = details[2]
+        goal_dict["scorer_type"] = details[3]
+        goal_dict["scorer_name"] = details[4]
+        return goal_dict
 
 def main():
     ls = LiveScore()
