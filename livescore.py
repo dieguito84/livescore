@@ -175,6 +175,12 @@ class LiveScore():
         goal_dict["scorer_type"] = details[3]
         goal_dict["scorer_name"] = details[4]
         return goal_dict
+    
+    def match_complete_details(self):
+        '''
+        to define
+        '''
+        pass
 
 def main():
     ls = LiveScore()
