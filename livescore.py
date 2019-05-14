@@ -182,6 +182,7 @@ def main():
         for i in range(len(ls.matches_finder(homepage, matches[1]))):
             print(ls.matches_finder(homepage, matches[1])[i])
             print(ls.match_parser(ls.matches_finder(homepage, matches[1])[i]))
+            print(ls.match_details(ls.match_parser(ls.matches_finder(homepage, matches[1])[i])))    # print match details json format test
             match_page = ls.get_html(ls.match_parser(ls.matches_finder(homepage, matches[1])[i])[4])
             print(match_page)
             print(ls.event_finder(match_page))
