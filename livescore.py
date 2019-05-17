@@ -178,6 +178,10 @@ class LiveScore():
     
     def match_complete_details(self):
         '''
+        Return a dictionary containing match results and goals details.
+
+        example of dictionary (JSON format) to return as match results with goals.
+
         to define
         '''
         pass
