@@ -185,6 +185,15 @@ class LiveScore():
         to define
         '''
         pass
+    
+    def leagues_and_matches_complete_details(self):
+        '''
+        Return a dictionary containing leagues and matches details with goals.
+
+        example of dictionary (JSON format) to return as leagues and matches details with goals.
+
+        to define
+        '''
 
 def main():
     ls = LiveScore()
