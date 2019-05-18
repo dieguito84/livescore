@@ -182,7 +182,35 @@ class LiveScore():
 
         example of dictionary (JSON format) to return as match results with goals.
 
-        to define
+        {
+            "time": "21:00" / "88'" / "FT",
+            "home_team": "Juventus",
+            "away_team": "Fiorentina",
+            "result": "2 - 1",
+            "goals": [
+                {
+                    "goal_type": "goal" / "own-goal" / "pen-goal",
+                    "min": "13'",
+                    "partial_score": "1 - 0",
+                    "scorer_type": "home" / "away",
+                    "scorer_name": "Roberto Baggio"
+                },
+                {
+                    "goal_type": "goal" / "own-goal" / "pen-goal",
+                    "min": "26'",
+                    "partial_score": "1 - 1",
+                    "scorer_type": "home" / "away",
+                    "scorer_name": "Roberto Baggio"
+                },
+                {
+                    "goal_type": "goal" / "own-goal" / "pen-goal",
+                    "min": "88'",
+                    "partial_score": "2 - 1",
+                    "scorer_type": "home" / "away",
+                    "scorer_name": "Roberto Baggio"
+                }
+            ]
+        }
         '''
         pass
     
