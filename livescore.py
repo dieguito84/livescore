@@ -212,7 +212,13 @@ class LiveScore():
             ]
         }
         '''
-        pass
+        match_complete_dict = {}
+        match_complete_dict["time"] = details[0]
+        match_complete_dict["home_team"] = details[1]
+        match_complete_dict["away_team"] = details[2]
+        match_complete_dict["result"] = details[3]
+        match_complete_dict["goals"] = details[5]
+        return match_complete_dict
   
     def leagues_and_matches_complete_details(self):
         '''
