@@ -213,7 +213,7 @@ class LiveScore():
         }
         '''
         pass
-    
+  
     def leagues_and_matches_complete_details(self):
         '''
         Return a dictionary containing leagues and matches details with goals.
@@ -351,6 +351,7 @@ class LiveScore():
             ]
         }
         '''
+        pass
 
 def main():
     ls = LiveScore()
@@ -364,16 +365,23 @@ def main():
         league_matches_html_elements = ls.matches_finder(homepage, matches[1])    # league's matchs html elements
         for i in range(len(league_matches_html_elements)):
             print(league_matches_html_elements[i])
+            match_details = ls.match_parser(league_matches_html_elements[i])
             print(ls.match_parser(league_matches_html_elements[i]))
-            print(ls.match_details(ls.match_parser(league_matches_html_elements[i])))    # print match details json format test
+            print(ls.match_details(match_details))    # print match details json format test
             match_page = ls.get_html(ls.match_parser(league_matches_html_elements[i])[4])    # get html passing match partial url as argument
             print(ls.event_finder(match_page))
+            goal_details_list = []
             for incident in ls.event_finder(match_page):
                 print(ls.goal_finder(incident))
                 if ls.goal_finder(incident) is not None:    # to exclude None object coming from goal_finder (implicit else)
                     # TODO: add management of explicit else statement (if ls.goal_finder(incident) is not "other-event")
                     goal_details = ls.goal_parser(ls.goal_finder(incident)[0], ls.goal_finder(incident)[1])    # list containing goal details [goal type, details]
                     print(ls.goal_details(goal_details))    # print goal details json format test
+                    goal_details_list.append(ls.goal_details(goal_details))
+            print(goal_details_list)    # OK
+            match_details.append(goal_details_list)
+            print(match_details)
+            print(ls.match_complete_details(match_details))
 
 if __name__ == "__main__":
     main()
