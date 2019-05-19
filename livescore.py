@@ -217,7 +217,7 @@ class LiveScore():
         match_complete_dict["home_team"] = details[1]
         match_complete_dict["away_team"] = details[2]
         match_complete_dict["result"] = details[3]
-        match_complete_dict["goals"] = details[5]
+        match_complete_dict["goals"] = details[5]    # details[4] is partial url, detail[5] will be added in main function
         return match_complete_dict
   
     def leagues_and_matches_complete_details(self):
@@ -387,7 +387,7 @@ def main():
             print(goal_details_list)    # OK
             match_details.append(goal_details_list)
             print(match_details)
-            print(ls.match_complete_details(match_details))
+            print(ls.match_complete_details(match_details))    # OK
 
 if __name__ == "__main__":
     main()
