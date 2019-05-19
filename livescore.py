@@ -176,7 +176,7 @@ class LiveScore():
         goal_dict["scorer_name"] = details[4]
         return goal_dict
     
-    def match_complete_details(self):
+    def match_complete_details(self, details):
         '''
         Return a dictionary containing match results and goals details.
 
@@ -360,13 +360,15 @@ def main():
     leagues = ls.leagues_finder(homepage)
 
     for matches in leagues:
-        print(matches[0])
-        print(ls.matches_finder(homepage, matches[1]))
-        for i in range(len(ls.matches_finder(homepage, matches[1]))):
-            print(ls.matches_finder(homepage, matches[1])[i])
-            print(ls.match_parser(ls.matches_finder(homepage, matches[1])[i]))
-            print(ls.match_details(ls.match_parser(ls.matches_finder(homepage, matches[1])[i])))    # print match details json format test
-            match_page = ls.get_html(ls.match_parser(ls.matches_finder(homepage, matches[1])[i])[4])
+        league = matches[0]
+        print(league)
+        league_matches_html_elements = ls.matches_finder(homepage, matches[1])
+        print(league_matches_html_elements)
+        for i in range(len(league_matches_html_elements)):
+            print(league_matches_html_elements[i])
+            print(ls.match_parser(league_matches_html_elements[i]))
+            print(ls.match_details(ls.match_parser(league_matches_html_elements[i])))    # print match details json format test
+            match_page = ls.get_html(ls.match_parser(league_matches_html_elements[i])[4])
             print(match_page)
             print(ls.event_finder(match_page))
             for incident in ls.event_finder(match_page):
