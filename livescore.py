@@ -367,11 +367,11 @@ def main():
     leagues = ls.leagues_finder(homepage)
 
     for matches in leagues:
-        league = matches[0]    # league name
+        league = matches[0]    # league name - not used right now, will be used in leagues_and_matches_complete_details method
         league_matches_html_elements = ls.matches_finder(homepage, matches[1])    # league's matchs html elements
         for i in range(len(league_matches_html_elements)):
             print(league_matches_html_elements[i])
-            match_details = ls.match_parser(league_matches_html_elements[i])
+            match_details = ls.match_parser(league_matches_html_elements[i])    # maybe change var name since it's the same as a method (match_details)
             print(ls.match_parser(league_matches_html_elements[i]))
             print(ls.match_details(match_details))    # print match details json format test
             match_page = ls.get_html(ls.match_parser(league_matches_html_elements[i])[4])    # get html passing match partial url as argument
@@ -384,10 +384,10 @@ def main():
                     goal_details = ls.goal_parser(ls.goal_finder(incident)[0], ls.goal_finder(incident)[1])    # list containing goal details [goal type, details]
                     print(ls.goal_details(goal_details))    # print goal details json format test
                     goal_details_list.append(ls.goal_details(goal_details))
-            print(goal_details_list)    # OK
+            print(goal_details_list)    # OK - print a list where each element is a dictionary containing goal details - just for test, to remove
             match_details.append(goal_details_list)
-            print(match_details)
-            print(ls.match_complete_details(match_details))    # OK
+            print(match_details)    # maybe change var name since it's the same as a method (match_details) - print match details + goal details as dictionaries
+            print(ls.match_complete_details(match_details))    # OK - print match complete details json format test
 
 if __name__ == "__main__":
     main()
