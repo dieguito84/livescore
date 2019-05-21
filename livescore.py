@@ -388,6 +388,9 @@ def main():
             match_details.append(goal_details_list)
             print(match_details)    # maybe change var name since it's the same as a method (match_details) - print match details + goal details as dictionaries
             print(ls.match_complete_details(match_details))    # OK - print match complete details json format test
+            # TODO: add execution of leagues_and_matches_complete_details method
+            # TODO: do some refactor and remove tests
+            # TODO: evaluate if main function should becamo a method of class LiveScore
 
 if __name__ == "__main__":
     main()
