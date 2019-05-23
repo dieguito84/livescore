@@ -12,6 +12,7 @@ UEFA_CLUB_LEAGUES = ["Champions League", "Europa League"]
 # TODO: add argparse for simple text output (short and detailed) and JSON format output (short and detailed)
 # TODO: fix "Champions League" and "Europa League" filter (atm got selected also Africa/Asia/Oceania Champions League and single countries Europa League play-offs)
 # TODO: add favourite team and favourite player
+# TODO: add :returns: in docstrings with description of what is returned
 
 class LiveScore():
     
@@ -370,15 +371,15 @@ def main():
         league = matches[0]    # league name - not used right now, will be used in leagues_and_matches_complete_details method
         league_matches_html_elements = ls.matches_finder(homepage, matches[1])    # league's matchs html elements
         for i in range(len(league_matches_html_elements)):
-            print(league_matches_html_elements[i])
+            print(league_matches_html_elements[i])    # raw html element
             match_details = ls.match_parser(league_matches_html_elements[i])    # maybe change var name since it's the same as a method (match_details)
-            print(ls.match_parser(league_matches_html_elements[i]))
+            print(ls.match_parser(league_matches_html_elements[i]))    # list of match details elements
             print(ls.match_details(match_details))    # print match details json format test
-            match_page = ls.get_html(ls.match_parser(league_matches_html_elements[i])[4])    # get html passing match partial url as argument
-            print(ls.event_finder(match_page))
+            match_page = ls.get_html(ls.match_parser(league_matches_html_elements[i])[4])    # get html passing match partial url as argument ([4])
+            print(ls.event_finder(match_page))    # list of raw html elements
             goal_details_list = []
             for incident in ls.event_finder(match_page):
-                print(ls.goal_finder(incident))
+                print(ls.goal_finder(incident))    # goal type and relative raw html element
                 if ls.goal_finder(incident) is not None:    # to exclude None object coming from goal_finder (implicit else)
                     # TODO: add management of explicit else statement (if ls.goal_finder(incident) is not "other-event")
                     goal_details = ls.goal_parser(ls.goal_finder(incident)[0], ls.goal_finder(incident)[1])    # list containing goal details [goal type, details]
