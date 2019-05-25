@@ -72,7 +72,7 @@ class LiveScore():
         :param match: single match HTML element. Required.
         '''
         self.match = match.text.split("\n")
-        # match[0] = 'orario'(21:00)(prima della partita) oppure 'minuto'(88')(durante la partita) oppure 'FT'(dopo la partita), match[1] = 'Limited coverage', match[2] = 'squadra in casa', match[3] = 'risultato(1 - 0)', match[4] = 'squadra fuori casa'
+        # match[0] = 'time'(21:00)(before match) or 'minute'(88')(during the match) or 'FT'(after the match), match[1] = 'Limited coverage', match[2] = 'home team', match[3] = 'result(1 - 0)', match[4] = 'away team'
         self.match_time = self.match[0]
         self.match_home_team = self.match[2]
         self.match_away_team = self.match[4]
@@ -86,7 +86,7 @@ class LiveScore():
 
         :param match_html: HTML page obtained via get_html method, using match's partial URL as parameter. Required.
         '''
-        self.match_events = match_html.find("[data-type=incident]")    # CSS selector - contiene solo eventi di tipo incident
+        self.match_events = match_html.find("[data-type=incident]")    # CSS selector - contains only events of type incident
         return self.match_events
     
     def goal_finder(self, event):
@@ -116,7 +116,7 @@ class LiveScore():
         '''
         self.goal_min = goal.find("div[class=min]")[0].text
         self.goal_partial_score = goal.find("span[class=score]")[0].text
-        if goal.find("div.tright[data-type=home] > span[data-type=player-name]")[0].text:   # se marcatore home
+        if goal.find("div.tright[data-type=home] > span[data-type=player-name]")[0].text:   # if home scorer
             self.goal_home_scorer = goal.find("span[data-type=player-name]")[0].text
             if len(self.goal_home_scorer) > 4:    # to prevent index out of range for player name <= 4 characters
                 if self.goal_home_scorer[4] == ".":
@@ -124,7 +124,7 @@ class LiveScore():
                 elif self.goal_home_scorer[1] == ".":
                     self.goal_home_scorer = self.goal_home_scorer[3:]
             return [goal_type, self.goal_min, self.goal_partial_score, "home", self.goal_home_scorer]
-        else:    # altrimenti marcatore away
+        else:    # otherwise away scorer
             self.goal_away_scorer = goal.find("span[data-type=player-name]")[1].text
             if len(self.goal_away_scorer) > 4:    # to prevent index out of range for player name <= 4 characters
                 if self.goal_away_scorer[4] == ".":
