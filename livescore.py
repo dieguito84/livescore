@@ -393,8 +393,8 @@ def main():
             # TODO: add execution of leagues_and_matches_complete_details method
             # TODO: do some refactor and remove tests
             # TODO: evaluate if main function should became a method of class LiveScore
-            #match_details_list.append(ls.match_complete_details(match_details))
-        #print(match_details_list)
+            match_details_list.append(ls.match_complete_details(match_details))
+        print(match_details_list)    # OK - print a list containing each match complete details for each league
 
 if __name__ == "__main__":
     main()
