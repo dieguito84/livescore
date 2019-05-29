@@ -359,8 +359,7 @@ class LiveScore():
         }
         '''
         leagues_and_matches_complete_dict = {}
-        leagues_and_matches_complete_dict["league"] = details[0]
-        leagues_and_matches_complete_dict["matches"] = details[1]
+        leagues_and_matches_complete_dict["leagues"] = details
         return leagues_and_matches_complete_dict
 
 def main():
@@ -369,12 +368,12 @@ def main():
     #homepage = ls.get_html("/soccer/2019-05-13/")    # to execute tests when there are no events today
 
     leagues = ls.leagues_finder(homepage)
+    leagues_and_matches_details_list = []
 
     for league in leagues:
         league_title = league[0]    # league name - not used right now, will be used in leagues_and_matches_complete_details method
         league_matches_html_elements = ls.matches_finder(homepage, league[1])    # league's matchs html elements
         match_details_list = []
-        leagues_and_matches_details_list = []
         for i in range(len(league_matches_html_elements)):
             print(league_matches_html_elements[i])    # raw html element
             match_details = ls.match_parser(league_matches_html_elements[i])    # maybe change var name since it's the same as a method (match_details)
@@ -399,9 +398,13 @@ def main():
             # TODO: evaluate if main function should became a method of class LiveScore
             match_details_list.append(ls.match_complete_details(match_details))
         print(match_details_list)    # OK - print a list containing each match complete details for each league
-        leagues_and_matches_details_list.append(league_title)
-        leagues_and_matches_details_list.append(match_details_list)
-    print(ls.leagues_and_matches_complete_details(leagues_and_matches_details_list))    # OK - print leagues and matches complete details json test - without leading "leagues"
+        leagues_and_matches_details_dict = {}
+        leagues_and_matches_details_dict["league"] = league_title
+        leagues_and_matches_details_dict["matches"] = match_details_list
+        print(leagues_and_matches_details_dict)    # OK - print a dictionary containing league title and each match complete details for each league
+        leagues_and_matches_details_list.append(leagues_and_matches_details_dict)
+    print(ls.leagues_and_matches_complete_details(leagues_and_matches_details_list))    # OK - print leagues and matches complete details json test - complete dictionary
+    # TODO: try to find a way to construct the complete dictionary all inside leagues_and_matches_complete_details method
 
 if __name__ == "__main__":
     main()
