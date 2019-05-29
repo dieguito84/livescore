@@ -374,6 +374,7 @@ def main():
         league_title = league[0]    # league name - not used right now, will be used in leagues_and_matches_complete_details method
         league_matches_html_elements = ls.matches_finder(homepage, league[1])    # league's matchs html elements
         match_details_list = []
+        leagues_and_matches_details_list = []
         for i in range(len(league_matches_html_elements)):
             print(league_matches_html_elements[i])    # raw html element
             match_details = ls.match_parser(league_matches_html_elements[i])    # maybe change var name since it's the same as a method (match_details)
@@ -398,6 +399,9 @@ def main():
             # TODO: evaluate if main function should became a method of class LiveScore
             match_details_list.append(ls.match_complete_details(match_details))
         print(match_details_list)    # OK - print a list containing each match complete details for each league
+        leagues_and_matches_details_list.append(league_title)
+        leagues_and_matches_details_list.append(match_details_list)
+    print(ls.leagues_and_matches_complete_details(leagues_and_matches_details_list))    # OK - print leagues and matches complete details json test - without leading "leagues"
 
 if __name__ == "__main__":
     main()
