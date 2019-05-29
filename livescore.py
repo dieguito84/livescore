@@ -405,6 +405,7 @@ def main():
         leagues_and_matches_details_list.append(leagues_and_matches_details_dict)
     print(ls.leagues_and_matches_complete_details(leagues_and_matches_details_list))    # OK - print leagues and matches complete details json test - complete dictionary
     # TODO: try to find a way to construct the complete dictionary all inside leagues_and_matches_complete_details method
+    # TODO: maybe creating another method to construct temporary dict?
 
 if __name__ == "__main__":
     main()
