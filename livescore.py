@@ -221,7 +221,7 @@ class LiveScore():
         match_complete_dict["goals"] = details[5]    # details[4] is partial url, detail[5] will be added in main function
         return match_complete_dict
   
-    def leagues_and_matches_complete_details(self):
+    def leagues_and_matches_complete_details(self, details):
         '''
         Return a dictionary containing leagues and matches details with goals.
 
@@ -358,7 +358,10 @@ class LiveScore():
             ]
         }
         '''
-        pass
+        leagues_and_matches_complete_dict = {}
+        leagues_and_matches_complete_dict["league"] = details[0]
+        leagues_and_matches_complete_dict["matches"] = details[1]
+        return leagues_and_matches_complete_dict
 
 def main():
     ls = LiveScore()
