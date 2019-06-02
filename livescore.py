@@ -359,7 +359,7 @@ class LiveScore():
         }
         '''
         leagues_and_matches_complete_dict = {}
-        leagues_and_matches_complete_dict["leagues"] = details
+        leagues_and_matches_complete_dict["results"] = details
         return leagues_and_matches_complete_dict
 
 def main():
