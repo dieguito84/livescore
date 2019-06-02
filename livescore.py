@@ -228,7 +228,7 @@ class LiveScore():
         example of dictionary (JSON format) to return as leagues and matches details with goals.
 
         {
-            "leagues": [
+            "results": [
                 {
                     "league": "England - Premier League",
                     "matches": [
