@@ -375,33 +375,25 @@ def main():
         league_matches_html_elements = ls.matches_finder(homepage, league[1])    # league's matchs html elements
         match_details_list = []
         for i in range(len(league_matches_html_elements)):
-            print(league_matches_html_elements[i])    # raw html element
             match_details = ls.match_parser(league_matches_html_elements[i])    # maybe change var name since it's the same as a method (match_details)
-            print(ls.match_parser(league_matches_html_elements[i]))    # list of match details elements
             print(ls.match_details(match_details))    # print match details json format test
             match_page = ls.get_html(ls.match_parser(league_matches_html_elements[i])[4])    # get html passing match partial url as argument ([4])
-            print(ls.event_finder(match_page))    # list of raw html elements
             goal_details_list = []
             for incident in ls.event_finder(match_page):
-                print(ls.goal_finder(incident))    # goal type and relative raw html element
                 if ls.goal_finder(incident) is not None:    # to exclude None object coming from goal_finder (implicit else)
                     # TODO: add management of explicit else statement (if ls.goal_finder(incident) is not "other-event")
                     goal_details = ls.goal_parser(ls.goal_finder(incident)[0], ls.goal_finder(incident)[1])    # list containing goal details [goal type, details]
                     print(ls.goal_details(goal_details))    # print goal details json format test
                     goal_details_list.append(ls.goal_details(goal_details))
-            print(goal_details_list)    # OK - print a list where each element is a dictionary containing goal details - just for test, to remove
             match_details.append(goal_details_list)
-            print(match_details)    # maybe change var name since it's the same as a method (match_details) - print match details + goal details as dictionaries
             print(ls.match_complete_details(match_details))    # OK - print match complete details json format test
             # TODO: add execution of leagues_and_matches_complete_details method
             # TODO: do some refactor and remove tests
             # TODO: evaluate if main function should became a method of class LiveScore
             match_details_list.append(ls.match_complete_details(match_details))
-        print(match_details_list)    # OK - print a list containing each match complete details for each league
         leagues_and_matches_details_dict = {}
         leagues_and_matches_details_dict["league"] = league_title
         leagues_and_matches_details_dict["matches"] = match_details_list
-        print(leagues_and_matches_details_dict)    # OK - print a dictionary containing league title and each match complete details for each league
         leagues_and_matches_details_list.append(leagues_and_matches_details_dict)
     print(ls.leagues_and_matches_complete_details(leagues_and_matches_details_list))    # OK - print leagues and matches complete details json test - complete dictionary
     # TODO: try to find a way to construct the complete dictionary all inside leagues_and_matches_complete_details method
