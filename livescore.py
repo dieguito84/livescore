@@ -387,9 +387,6 @@ def main():
                     goal_details_list.append(ls.goal_details(goal_details))
             match_details.append(goal_details_list)
             print(ls.match_complete_details(match_details))    # OK - print match complete details json format test
-            # TODO: add execution of leagues_and_matches_complete_details method
-            # TODO: do some refactor and remove tests
-            # TODO: evaluate if main function should became a method of class LiveScore
             match_details_list.append(ls.match_complete_details(match_details))
         leagues_and_matches_details_dict = {}
         leagues_and_matches_details_dict["league"] = league_title
@@ -398,6 +395,7 @@ def main():
     print(ls.leagues_and_matches_complete_details(leagues_and_matches_details_list))    # OK - print leagues and matches complete details json test - complete dictionary
     # TODO: try to find a way to construct the complete dictionary all inside leagues_and_matches_complete_details method
     # TODO: maybe creating another method to construct temporary dict?
+    # TODO: evaluate if main function should became a method of class LiveScore
 
 if __name__ == "__main__":
     main()
