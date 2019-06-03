@@ -13,6 +13,7 @@ UEFA_CLUB_LEAGUES = ["Champions League", "Europa League"]
 # TODO: fix "Champions League" and "Europa League" filter (at the moment got selected also Africa/Asia/Oceania Champions League and single countries Europa League play-offs)
 # TODO: add favourite team and favourite player and filter events accordingly
 # TODO: add :returns: in docstrings with description of what is returned
+# TODO: create a separate Markdown file to show JSON output examples, instead of using comments in this file
 
 class LiveScore():
     
