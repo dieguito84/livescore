@@ -8,7 +8,6 @@ TOP5_NATIONAL_LEAGUES = ["England - Premier League", "Italy - Serie A", "Spain -
 UEFA_CLUB_LEAGUES = ["Champions League", "Europa League"]
 
 # TODO: add methods to print results and goals details
-# TODO: add methods to return complete match details (result + goals) as dictionary (JSON format)
 # TODO: add argparse for simple text output (short and detailed) and JSON format output (short and detailed)
 # TODO: fix "Champions League" and "Europa League" filter (at the moment got selected also Africa/Asia/Oceania Champions League and single countries Europa League play-offs)
 # TODO: add favourite team and favourite player and filter events accordingly
@@ -46,7 +45,7 @@ class LiveScore():
         self.leagues_elements = []
         for l in self.all_leagues:
             self.league = l.text.split("\n")
-            # league[0] = 'paese - campionato'(England - Premier League) oppure 'competizione - stage'(Europa League - Quarter-finals), league[1] = 'Mese giorno' (April 19)
+            # league[0] = 'country - league'(England - Premier League) or 'competition - stage'(Europa League - Quarter-finals), league[1] = 'Month day' (April 19)
             self.league_title = self.league[0]
             if self.league_title in TOP5_NATIONAL_LEAGUES or any(x in self.league[0] for x in UEFA_CLUB_LEAGUES):
                 self.leagues_names.append(self.league_title)
@@ -397,6 +396,7 @@ def main():
     # TODO: try to find a way to construct the complete dictionary all inside leagues_and_matches_complete_details method
     # TODO: maybe creating another method to construct temporary dict?
     # TODO: evaluate if main function should became a method of class LiveScore
+    # TODO: inside each method add mid-steps executed to return JSON format, so main function will be very short and basic
 
 if __name__ == "__main__":
     main()
