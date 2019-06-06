@@ -364,7 +364,7 @@ class LiveScore():
         leagues_and_matches_complete_dict["results"] = details
         return leagues_and_matches_complete_dict
 
-def main():
+def main(mode="JSON"):
     ls = LiveScore()
     homepage = ls.get_html()
     #homepage = ls.get_html("/soccer/2019-05-13/")    # to execute tests when there are no events today
@@ -378,27 +378,35 @@ def main():
         match_details_list = []
         for i in range(len(league_matches_html_elements)):
             match_details = ls.match_parser(league_matches_html_elements[i])    # maybe change var name since it's the same as a method (match_details)
-            #print(ls.match_details(match_details))    # print match details json format test
-            print(json.dumps(ls.match_details(match_details), indent=4))    # print match details json format test (pretty print)
+            if mode == "text":
+                print(ls.match_details(match_details))    # print match details json format test
+            elif mode == "JSON":
+                print(json.dumps(ls.match_details(match_details), indent=4))    # print match details json format test (pretty print)
             match_page = ls.get_html(ls.match_parser(league_matches_html_elements[i])[4])    # get html passing match partial url as argument ([4])
             goal_details_list = []
             for incident in ls.event_finder(match_page):
                 if ls.goal_finder(incident) is not None:    # to exclude None object coming from goal_finder (implicit else)
                     # TODO: add management of explicit else statement (if ls.goal_finder(incident) is not "other-event")
                     goal_details = ls.goal_parser(ls.goal_finder(incident)[0], ls.goal_finder(incident)[1])    # list containing goal details [goal type, details]
-                    #print(ls.goal_details(goal_details))    # print goal details json format test
-                    print(json.dumps(ls.goal_details(goal_details), indent=4))    # print goal details json format test (pretty print)
+                    if mode == "text":
+                        print(ls.goal_details(goal_details))    # print goal details json format test
+                    elif mode == "JSON":
+                        print(json.dumps(ls.goal_details(goal_details), indent=4))    # print goal details json format test (pretty print)
                     goal_details_list.append(ls.goal_details(goal_details))
             match_details.append(goal_details_list)
-            #print(ls.match_complete_details(match_details))    # OK - print match complete details json format test
-            print(json.dumps(ls.match_complete_details(match_details), indent=4))
+            if mode == "text":
+                print(ls.match_complete_details(match_details))    # OK - print match complete details json format test
+            elif mode == "JSON":
+                print(json.dumps(ls.match_complete_details(match_details), indent=4))
             match_details_list.append(ls.match_complete_details(match_details))
         leagues_and_matches_details_dict = {}
         leagues_and_matches_details_dict["league"] = league_title
         leagues_and_matches_details_dict["matches"] = match_details_list
         leagues_and_matches_details_list.append(leagues_and_matches_details_dict)
-    #print(ls.leagues_and_matches_complete_details(leagues_and_matches_details_list))    # OK - print leagues and matches complete details json test - complete dictionary
-    print(json.dumps(ls.leagues_and_matches_complete_details(leagues_and_matches_details_list), indent=4))    # OK - print leagues and matches complete details json test - complete dictionary (pretty print)
+    if mode == "text":
+        print(ls.leagues_and_matches_complete_details(leagues_and_matches_details_list))    # OK - print leagues and matches complete details json test - complete dictionary
+    elif mode == "JSON":
+        print(json.dumps(ls.leagues_and_matches_complete_details(leagues_and_matches_details_list), indent=4))    # OK - print leagues and matches complete details json test - complete dictionary (pretty print)
     # TODO: try to find a way to construct the complete dictionary all inside leagues_and_matches_complete_details method
     # TODO: maybe creating another method to construct temporary dict?
     # TODO: evaluate if main function should became a method of class LiveScore
