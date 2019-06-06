@@ -365,6 +365,11 @@ class LiveScore():
         return leagues_and_matches_complete_dict
 
 def main(mode="JSON"):
+    '''
+    Main routine execution
+    
+    :param mode: "text" or "JSON" are accepted. Default is "JSON". Optional.
+    '''
     ls = LiveScore()
     homepage = ls.get_html()
     #homepage = ls.get_html("/soccer/2019-05-13/")    # to execute tests when there are no events today
