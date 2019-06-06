@@ -402,7 +402,7 @@ def main():
     # TODO: try to find a way to construct the complete dictionary all inside leagues_and_matches_complete_details method
     # TODO: maybe creating another method to construct temporary dict?
     # TODO: evaluate if main function should became a method of class LiveScore
-    # TODO: inside each method add mid-steps executed to return JSON format, so main function will be very short and basic
+    # TODO: if it's possible, inside each method, add mid-steps executed to return JSON format, so main function will be very short and basic
 
 if __name__ == "__main__":
     main()
