@@ -397,7 +397,7 @@ def main(mode="JSON"):
             if mode == "text":
                 print(ls.match_complete_details(match_details))    # OK - print match complete details json format test
             elif mode == "JSON":
-                print(json.dumps(ls.match_complete_details(match_details), indent=4))
+                print(json.dumps(ls.match_complete_details(match_details), indent=4))    # OK - print match complete details json format test (pretty print)
             match_details_list.append(ls.match_complete_details(match_details))
         leagues_and_matches_details_dict = {}
         leagues_and_matches_details_dict["league"] = league_title
