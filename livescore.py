@@ -19,13 +19,12 @@ class LiveScore():
     
     def get_html(self, partial_url="", user_agent=USER_AGENT):
         '''
-        Return HTML page as <class 'requests_html.HTML'> object.
-
         Retrieve HTML page and renders it using requests-html library.
         It supports JavaScript.
         
         :param partial_url: partial url to add to base url (https://www.livescore.com). Optional.
         :param user_agent: browser user agent. Optional.
+        :returns: HTML page as <class 'requests_html.HTML'> object.
         '''
         self.session = HTMLSession()
         self.page = self.session.get(BASE_URL + partial_url, headers={"User-Agent": user_agent})
@@ -34,12 +33,14 @@ class LiveScore():
     
     def leagues_finder(self, homepage_html):
         '''
-        Return a nested list where each element is a tuple containing
-        league title and HTML page as <class 'requests_html.HTML'> object.
-
+        Find league title and related HTML page portion
+        
+        # TODO: find a way to show example in a more elegant way
+        returned list example:
         [(England - Premier League, requests_html.HTML), (Italy - Serie A, requests_html.HTML), ...]
 
         :param homepage_html: HTML page obtained via get_html method. Required.
+        :returns: nested list where each element is a tuple containing league title and HTML page as <class 'requests_html.HTML'> object.
         '''
         self.all_leagues = homepage_html.find("div[class='row row-tall'][data-type='stg']") + homepage_html.find("div[class='row row-tall mt4']")
         self.leagues_names = []
