@@ -57,10 +57,11 @@ class LiveScore():
     
     def matches_finder(self, homepage_html, league_html):
         '''
-        Return a list containing HTML elements for every match of a league.
+        Find HTML elements for every match of a league.
 
         :param homepage_html: HTML page obtained via get_html method. Required.
-        :param league_html: HTML page obtained via leagues_finder method. Required. 
+        :param league_html: HTML page obtained via leagues_finder method. Required.
+        :returns: list containing HTML elements for every match of a league.
         '''
         self.all_matches = homepage_html.find("a[data-stg-id='{}']".format(league_html.attrs["data-stg-id"]))
         return self.all_matches
