@@ -35,13 +35,13 @@ class LiveScore():
         '''
         Find league title and related HTML page portion
         
-        # TODO: find a way to show example in a more elegant way
         returned list example:
         [(England - Premier League, requests_html.HTML), (Italy - Serie A, requests_html.HTML), ...]
 
         :param homepage_html: HTML page obtained via get_html method. Required.
         :returns: nested list where each element is a tuple containing league title and HTML page as <class 'requests_html.HTML'> object.
         '''
+        # TODO: find a way to show example inside the docstring in a more elegant way
         self.all_leagues = homepage_html.find("div[class='row row-tall'][data-type='stg']") + homepage_html.find("div[class='row row-tall mt4']")
         self.leagues_names = []
         self.leagues_elements = []
