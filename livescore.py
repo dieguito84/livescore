@@ -112,14 +112,16 @@ class LiveScore():
 
     def goal_parser(self, goal_type, goal):
         '''
-        Return a list containing goal type, time, partial result, scorer type, scorer name.
+        Parser for goal details:
 
+        Returned lists examples:
         [goal_type, self.goal_min, self.goal_partial_score, "home", self.goal_home_scorer]
 
         [goal_type, self.goal_min, self.goal_partial_score, "away", self.goal_away_scorer]
 
         :param goal_type: "goal" or "own-goal" or "pen-goal"
         :param goal: HTML page obtained via goal_finder method. Required.
+        :returns: list containing goal type, time, partial result, scorer type, scorer name.
         '''
         self.goal_min = goal.find("div[class=min]")[0].text
         self.goal_partial_score = goal.find("span[class=score]")[0].text
