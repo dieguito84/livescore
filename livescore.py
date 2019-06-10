@@ -97,9 +97,10 @@ class LiveScore():
     
     def goal_finder(self, event):
         '''
-        Return a list containing goal type and event itself (as HTML code).
+        Finds all events of type goal and its HTML elements.
 
         :param event: HTML page obtained via event_finder method. Required.
+        :returns: list containing goal type and event itself (as HTML code).
         '''
         if event.find("svg[class='inc goal']"):
             return ["goal", event]
