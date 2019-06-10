@@ -35,7 +35,7 @@ class LiveScore():
         '''
         Find league title and related HTML page portion
         
-        returned list example:
+        Returned list example:
         [(England - Premier League, requests_html.HTML), (Italy - Serie A, requests_html.HTML), ...]
 
         :param homepage_html: HTML page obtained via get_html method. Required.
@@ -68,11 +68,13 @@ class LiveScore():
     
     def match_parser(self, match):
         '''
-        Return a list containing details of a match: time, home team, away team, result and match's partial url.
-
+        Parser for match details.
+        
+        Returned list example:
         [self.match_time, self.match_home_team, self.match_away_team, self.match_result, self.match_partial_url]
 
         :param match: single match HTML element. Required.
+        :returns: list containing details of a match: time, home team, away team, result and match's partial url.
         '''
         self.match = match.text.split("\n")
         # match[0] = 'time'(21:00)(before match) or 'minute'(88')(during the match) or 'FT'(after the match), match[1] = 'Limited coverage', match[2] = 'home team', match[3] = 'result(1 - 0)', match[4] = 'away team'
