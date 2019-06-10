@@ -87,9 +87,10 @@ class LiveScore():
     
     def event_finder(self, match_html):
         '''
-        Return a list containing HTML elements for every event of a match.
+        Finds all events of a match and take related HTML elements.
 
         :param match_html: HTML page obtained via get_html method, using match's partial URL as parameter. Required.
+        :returns: list containing HTML elements for every event of a match.
         '''
         self.match_events = match_html.find("[data-type=incident]")    # CSS selector - contains only events of type incident
         return self.match_events
