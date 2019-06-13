@@ -404,7 +404,6 @@ def main(mode="JSON"):
                 if ls.goal_finder(incident) is not None:    # to exclude None object coming from goal_finder (implicit else)
                     # TODO: add management of explicit else statement (if ls.goal_finder(incident) is not "other-event")
                     goal_details = ls.goal_parser(ls.goal_finder(incident)[0], ls.goal_finder(incident)[1])    # list containing goal details [goal type, details]
-                    print(goal_details)
                     if mode == "text":
                         print(ls.goal_details(goal_details))    # print goal details json format test
                     elif mode == "JSON":
