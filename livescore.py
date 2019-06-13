@@ -144,7 +144,7 @@ class LiveScore():
 
     def match_details(self, details):
         '''
-        Return a dictionary containing match result details.
+        Return match result details in dictionary format.
 
         example of dictionary (JSON format) to return as match result
 
@@ -167,7 +167,7 @@ class LiveScore():
 
     def goal_details(self, details):
         '''
-        Return a dictionary containing goal event details.
+        Return goal event details in  dictionary format.
 
         example of dictionary (JSON format) to return as goal event
 
@@ -179,6 +179,8 @@ class LiveScore():
             "scorer_name": "Roberto Baggio"
         }
 
+        :param details: list containing goal details. Required. Example: ['goal', "52'", '1 - 0', 'home', 'Riccardo Orsolini']
+        :returns: dictionary containing goal event details.
         '''
         goal_dict = {}
         goal_dict["goal_type"] = details[0]
@@ -380,8 +382,8 @@ def main(mode="JSON"):
     :param mode: "text" or "JSON" are accepted. Default is "JSON". Optional.
     '''
     ls = LiveScore()
-    homepage = ls.get_html()
-    #homepage = ls.get_html("/soccer/2019-05-13/")    # to execute tests when there are no events today
+    #homepage = ls.get_html()
+    homepage = ls.get_html("/soccer/2019-05-13/")    # to execute tests when there are no events today
 
     leagues = ls.leagues_finder(homepage)
     leagues_and_matches_details_list = []
@@ -402,6 +404,7 @@ def main(mode="JSON"):
                 if ls.goal_finder(incident) is not None:    # to exclude None object coming from goal_finder (implicit else)
                     # TODO: add management of explicit else statement (if ls.goal_finder(incident) is not "other-event")
                     goal_details = ls.goal_parser(ls.goal_finder(incident)[0], ls.goal_finder(incident)[1])    # list containing goal details [goal type, details]
+                    print(goal_details)
                     if mode == "text":
                         print(ls.goal_details(goal_details))    # print goal details json format test
                     elif mode == "JSON":
