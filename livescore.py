@@ -155,6 +155,8 @@ class LiveScore():
             "result": "2 - 1"
         }
 
+        :param details: list containing match details. Required. Example: ['FT', 'Bologna', 'Parma', '4 - 1', '/soccer/italy/serie-a/bologna-vs-parma/6-15160337/']
+        :returns: dictionary containing match result details.
         '''
         match_dict = {}
         match_dict["time"] = details[0]
