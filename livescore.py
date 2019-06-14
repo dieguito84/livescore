@@ -239,7 +239,7 @@ class LiveScore():
   
     def leagues_and_matches_complete_details(self, details):
         '''
-        Return a dictionary containing leagues and matches details with goals.
+        Return match results and goals details for every leagues, in dictionary format.
 
         example of dictionary (JSON format) to return as leagues and matches details with goals.
 
@@ -373,6 +373,9 @@ class LiveScore():
                 }
             ]
         }
+
+        :param details: list containing league, match details (each match is a dictionary) and goal details (each goal event is a dictionary) of every match.
+        :returns: dictionary containing leagues and matches details with goals.
         '''
         leagues_and_matches_complete_dict = {}
         leagues_and_matches_complete_dict["results"] = details
