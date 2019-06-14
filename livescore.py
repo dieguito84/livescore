@@ -167,7 +167,7 @@ class LiveScore():
 
     def goal_details(self, details):
         '''
-        Return goal event details in  dictionary format.
+        Return goal event details in dictionary format.
 
         example of dictionary (JSON format) to return as goal event
 
@@ -192,7 +192,7 @@ class LiveScore():
     
     def match_complete_details(self, details):
         '''
-        Return a dictionary containing match results and goals details.
+        Return match results and goals details in dictionary format.
 
         example of dictionary (JSON format) to return as match results with goals.
 
@@ -225,6 +225,9 @@ class LiveScore():
                 }
             ]
         }
+
+        :param details: list containing match details and goal details (each goal event is a dictionary) of a single match.
+        :returns: dictionary containing match results and goals details.
         '''
         match_complete_dict = {}
         match_complete_dict["time"] = details[0]
@@ -382,8 +385,8 @@ def main(mode="JSON"):
     :param mode: "text" or "JSON" are accepted. Default is "JSON". Optional.
     '''
     ls = LiveScore()
-    #homepage = ls.get_html()
-    homepage = ls.get_html("/soccer/2019-05-13/")    # to execute tests when there are no events today
+    homepage = ls.get_html()
+    #homepage = ls.get_html("/soccer/2019-05-13/")    # to execute tests when there are no events today
 
     leagues = ls.leagues_finder(homepage)
     leagues_and_matches_details_list = []
