@@ -12,7 +12,6 @@ UEFA_CLUB_LEAGUES = ["Champions League", "Europa League"]
 # TODO: add argparse for simple text output (short and detailed) and JSON format output (short and detailed)
 # TODO: fix "Champions League" and "Europa League" filter (at the moment got selected also Africa/Asia/Oceania Champions League and single countries Europa League play-offs)
 # TODO: add favourite team and favourite player and filter events accordingly
-# TODO: fix docstrings for match_details, goal_details, match_complete_details, leagues_and_matches_complete_details
 # TODO: create a separate Markdown file to show JSON output examples, instead of using comments in this file
 
 class LiveScore():
